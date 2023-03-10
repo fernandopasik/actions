@@ -41,7 +41,20 @@ runs:
         check-latest: true
         node-version: 18
 
+    - name: Cache NPM dependencies
+      uses: actions/cache@v3
+      id: node-modules-cache
+      with:
+        path: |
+          node_modules
+          .yarn
+        key: ${{ runner.os }}-$PM-${{ hashFiles($LOCK) }}
+      env:
+        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+        LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
+
     - name: Install Dependencies
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: |
         if [ $PM == "yarn1" ]; then
           yarn install --frozen-lockfile
