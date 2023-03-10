@@ -27,7 +27,7 @@ runs:
       run: 'echo Package Manager: ${{ steps.detect-node-pm.outputs.node-pm }}'
       shell: bash
 
-    - name: Setup Node
+    - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         # Reference for setup-node action options
