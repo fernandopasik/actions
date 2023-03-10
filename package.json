@@ -1,0 +1,23 @@
+{
+  "name": "@fernandopasik/actions",
+  "description": "My collection of github actions",
+  "repository": "fernandopasik/actions",
+  "author": "Fernando Pasik <fernando@pasik.com.ar> (https://fernandopasik.com)",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky install",
+    "verify": "npm run format:check"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
+    "prettier-plugin-pkg": "^0.17.1",
+    "prettier-plugin-sh": "^0.12.8"
+  }
+}
