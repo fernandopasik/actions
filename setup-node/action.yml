@@ -48,7 +48,7 @@ runs:
         path: |
           node_modules
           .yarn
-        key: ${{ runner.os }}-$PM-${{ hashFiles($LOCK) }}
+        key: ${{ runner.os }}-$PM-${{ hashFiles(env.LOCK) }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
