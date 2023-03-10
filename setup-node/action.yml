@@ -4,13 +4,36 @@ description: Setups latest Node LTS and installs dependencies
 runs:
   using: composite
   steps:
+    - name: Detect Node Package Manager
+      id: detect-node-pm
+      # Detect supported package managers by actions/setup-node
+      # npm, pnpm, yarn1, yarn2
+      # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
+      run: |
+        if [ -f "yarn.lock" ]; then
+          if [ -d ".yarn" ]; then
+            echo "node-pm=yarn2" >> $GITHUB_OUTPUT
+          else
+            echo "node-pm=yarn1" >> $GITHUB_OUTPUT
+          fi
+        elif [ -f "pnpm-lock.yaml" ]; then
+          echo "node-pm=pnpm" >> $GITHUB_OUTPUT
+        else
+          echo "node-pm=npm" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
+
+    - name: Display Node Package Manager
+      run: 'echo Package Manager: ${{ steps.detect-node-pm.outputs.node-pm }}'
+      shell: bash
+
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
-        cache: npm
+        cache: ${{ steps.detect-node-pm.outputs.node-pm }}
         check-latest: true
         node-version: 18
     - name: Install Dependencies
