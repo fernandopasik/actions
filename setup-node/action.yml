@@ -36,6 +36,7 @@ runs:
         cache: ${{ steps.detect-node-pm.outputs.node-pm }}
         check-latest: true
         node-version: 18
+
     - name: Install Dependencies
       run: npm ci
       shell: bash
