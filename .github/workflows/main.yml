@@ -32,9 +32,9 @@ jobs:
       - name: Setup Python
         uses: ./setup-python
       - name: Check Python
-        run: python -v
+        run: python -V
       - name: Check Pip
-        run: pip -v
+        run: pip -V
   check-format:
     name: Check Format
     runs-on: ubuntu-latest
