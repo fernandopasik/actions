@@ -35,10 +35,14 @@ runs:
       run: pip -V
       shell: bash
 
-    - name: Install Python Dependencies
-      if: steps.python-cache.outputs.cache-hit != 'true'
+    - name: Activate Python Virtual Env
       run: |
         python -m venv venv
         . venv/bin/activate
-        pip install -r requirements.txt
+        echo PATH=$PATH >> $GITHUB_ENV
+      shell: bash
+
+    - name: Install Python Dependencies
+      if: steps.python-cache.outputs.cache-hit != 'true'
+      run: pip install -r requirements.txt
       shell: bash
