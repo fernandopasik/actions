@@ -73,6 +73,10 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
+    - name: Display Node version
+      run: node -v
+      shell: bash
+
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: |
