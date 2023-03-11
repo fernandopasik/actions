@@ -36,6 +36,7 @@ runs:
       shell: bash
 
     - name: Install Python Dependencies
+      if: steps.python-cache.outputs.cache-hit != 'true'
       run: |
         python -m venv venv
         . venv/bin/activate
