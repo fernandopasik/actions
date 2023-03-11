@@ -36,7 +36,7 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
-    - name: Load Cache NPM dependencies
+    - name: Load Cached NPM dependencies
       uses: actions/cache@v3
       id: node-modules-cache
       with:
@@ -61,7 +61,7 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
-    - name: Save Cache NPM dependencies
+    - name: Save in Cache NPM dependencies
       uses: actions/cache@v3
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       with:
