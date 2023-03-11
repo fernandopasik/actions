@@ -77,6 +77,19 @@ runs:
       run: node -v
       shell: bash
 
+    - name: Display Package Manager version
+      run: |
+        if [ $PM == "yarn1" ] || [ $PM == "yarn2" ]; then
+          yarn -v
+        elif [ $PM == "pnpm" ]; then
+          pnpm -v
+        else
+          npm -v
+        fi
+      shell: bash
+      env:
+        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: |
