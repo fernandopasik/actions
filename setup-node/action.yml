@@ -54,7 +54,7 @@ runs:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
-        cache: ${{ env.CACHE-HIT == 'true' && '' || env.PM }}
+        cache: ${{ env.CACHE-HIT && '' || env.PM }}
         check-latest: true
         node-version: 18
       env:
