@@ -16,6 +16,7 @@ jobs:
         uses: ./setup-node
       - name: Setup Python
         uses: ./setup-python
+
   check-install:
     name: Check Install and Cache
     runs-on: ubuntu-latest
@@ -35,6 +36,7 @@ jobs:
         run: python -V
       - name: Check Pip
         run: pip -V
+
   check-format:
     name: Check Format
     runs-on: ubuntu-latest
