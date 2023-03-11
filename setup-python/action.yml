@@ -9,3 +9,11 @@ runs:
       with:
         check-latest: true
         python-version: 3
+
+    - name: Display Python version
+      run: python -V
+      shell: bash
+
+    - name: Display Pip version
+      run: pip -V
+      shell: bash
