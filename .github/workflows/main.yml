@@ -26,11 +26,15 @@ jobs:
       - name: Setup Node
         uses: ./setup-node
       - name: Check Node
+        run: node -v
+      - name: Check Npm
         run: npm -v
       - name: Setup Python
         uses: ./setup-python
       - name: Check Python
         run: python -v
+      - name: Check Pip
+        run: pip -v
   check-format:
     name: Check Format
     runs-on: ubuntu-latest
