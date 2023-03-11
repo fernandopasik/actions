@@ -17,3 +17,10 @@ runs:
     - name: Display Pip version
       run: pip -V
       shell: bash
+
+    - name: Install Python Dependencies
+      run: |
+        python -m venv venv
+        . venv/bin/activate
+        pip install -r requirements.txt
+      shell: bash
