@@ -36,19 +36,33 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
+    - name: Load Cache NPM dependencies
+      uses: actions/cache@v3
+      id: node-modules-cache
+      with:
+        path: |
+          node_modules
+          .yarn
+        key: ${{ runner.os }}-$PM-${{ hashFiles(env.LOCK) }}
+      env:
+        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+        LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
+
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
-        cache: ${{ steps.detect-node-pm.outputs.node-pm }}
+        cache: ${{ env.CACHE-HIT == 'true' && '' || env.PM }}
         check-latest: true
         node-version: 18
+      env:
+        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+        CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
-    - name: Cache NPM dependencies
+    - name: Save Cache NPM dependencies
       uses: actions/cache@v3
-      id: node-modules-cache
       with:
         path: |
           node_modules
