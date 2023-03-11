@@ -63,6 +63,7 @@ runs:
 
     - name: Save Cache NPM dependencies
       uses: actions/cache@v3
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
       with:
         path: |
           node_modules
