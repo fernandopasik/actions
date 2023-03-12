@@ -23,6 +23,12 @@ jobs:
         shell: bash
       - name: Setup Python
         uses: ./setup-python
+      - name: Check Ansible installs
+        run: |
+          ansible --version
+          ansible-galaxy --version
+          ansible-lint --version
+        shell: bash
       - name: Create Ansible requirements
         run: |
           cat <<EOF >requirements.yml
@@ -35,7 +41,7 @@ jobs:
         run: |
           cat <<EOF >ansible.cfg
           [defaults]
-          roles_path = roles.galaxy:roles
+          roles_path = galaxy/roles:roles
           EOF
         shell: bash
       - name: Setup Ansible
