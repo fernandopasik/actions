@@ -12,6 +12,6 @@ runs:
       run: ansible-galaxy --version
       shell: bash
 
-    - name: Install Ansible Galaxy roles
+    - name: Install Ansible Galaxy dependencies
       run: ansible-galaxy install -r requirements.yml
       shell: bash
