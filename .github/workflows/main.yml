@@ -26,16 +26,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Node
         uses: ./setup-node
-      - name: Check Node
-        run: node -v
-      - name: Check Npm
-        run: npm -v
       - name: Setup Python
         uses: ./setup-python
-      - name: Check Python
-        run: python -V
-      - name: Check Pip
-        run: pip -V
 
   check-format:
     name: Check Format
