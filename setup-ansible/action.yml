@@ -1,0 +1,9 @@
+name: Setup Ansible
+description: Setups latest Ansible and installs Ansible Galaxy dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Install Ansible Galaxy roles
+      run: ansible-galaxy install -r requirements.yml
+      shell: bash
