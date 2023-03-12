@@ -16,6 +16,8 @@ jobs:
         uses: ./setup-node
       - name: Setup Python
         uses: ./setup-python
+      - name: Setup Ansible
+        uses: ./setup-ansible
 
   check-install:
     name: Check Install and Cache
@@ -28,6 +30,8 @@ jobs:
         uses: ./setup-node
       - name: Setup Python
         uses: ./setup-python
+      - name: Setup Ansible
+        uses: ./setup-ansible
 
   check-format:
     name: Check Format
