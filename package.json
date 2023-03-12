@@ -1,5 +1,5 @@
 {
-  "name": "@fernandopasik/actions",
+  "name": "actions",
   "description": "My collection of github actions",
   "repository": "fernandopasik/actions",
   "author": "Fernando Pasik <fernando@pasik.com.ar> (https://fernandopasik.com)",
