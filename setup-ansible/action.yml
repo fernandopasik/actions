@@ -4,6 +4,14 @@ description: Setups latest Ansible and installs Ansible Galaxy dependencies
 runs:
   using: composite
   steps:
+    - name: Display Ansible version
+      run: ansible --version
+      shell: bash
+
+    - name: Display Ansible Galaxy version
+      run: ansible-galaxy --version
+      shell: bash
+
     - name: Install Ansible Galaxy roles
       run: ansible-galaxy install -r requirements.yml
       shell: bash
