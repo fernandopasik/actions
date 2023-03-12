@@ -23,6 +23,21 @@ jobs:
         shell: bash
       - name: Setup Python
         uses: ./setup-python
+      - name: Create Ansible requirements
+        run: |
+          cat <<EOF >requirements.yml
+          ---
+          roles:
+            - name: geerlingguy.git
+          EOF
+        shell: bash
+      - name: Create Ansible config
+        run: |
+          cat <<EOF >ansible.cfg
+          [defaults]
+          roles_path = roles.galaxy:roles
+          EOF
+        shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
 
@@ -44,6 +59,21 @@ jobs:
         shell: bash
       - name: Setup Python
         uses: ./setup-python
+      - name: Create Ansible requirements
+        run: |
+          cat <<EOF >requirements.yml
+          ---
+          roles:
+            - name: geerlingguy.git
+          EOF
+        shell: bash
+      - name: Create Ansible config
+        run: |
+          cat <<EOF >ansible.cfg
+          [defaults]
+          roles_path = roles.galaxy:roles
+          EOF
+        shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
 
