@@ -36,6 +36,7 @@ runs:
       shell: bash
 
     - name: Activate Python Virtual Env
+      # Enables venv and stores its path for follow-up steps
       run: |
         python -m venv venv
         . venv/bin/activate
