@@ -59,6 +59,12 @@ jobs:
         shell: bash
       - name: Setup Python
         uses: ./setup-python
+      - name: Check Ansible installs
+        run: |
+          ansible --version
+          ansible-galaxy --version
+          ansible-lint --version
+        shell: bash
       - name: Create Ansible requirements
         run: |
           cat <<EOF >requirements.yml
