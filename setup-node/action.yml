@@ -1,6 +1,11 @@
 name: Setup Node
 description: Setups latest Node LTS and installs dependencies
 
+inputs:
+  node-version:
+    description: 'Node version to install'
+    default: '18'
+
 runs:
   using: composite
   steps:
@@ -56,7 +61,7 @@ runs:
         # https://github.com/actions/setup-node#usage
         cache: ${{ env.CACHE-HIT != 'true' && env.PM || env.NOTDEFINED }}
         check-latest: true
-        node-version: 18
+        node-version: ${{ inputs.node-version }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
