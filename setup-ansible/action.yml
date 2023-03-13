@@ -1,6 +1,11 @@
 name: Setup Ansible
 description: Setups latest Ansible and installs Ansible Galaxy dependencies
 
+inputs:
+  cache-path:
+    description: 'Folder to download Ansible Galaxy dependencies'
+    default: 'galaxy'
+
 runs:
   using: composite
   steps:
@@ -8,7 +13,7 @@ runs:
       uses: actions/cache@v3
       id: ansible-galaxy-cache
       with:
-        path: galaxy
+        path: ${{ inputs.cache-path }}
         key: ansible-galaxy-${{ hashFiles('requirements.yml') }}
 
     - name: Display Ansible version
