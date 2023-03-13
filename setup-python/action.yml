@@ -20,13 +20,6 @@ runs:
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
-    - name: Save in Cache Python dependencies
-      uses: actions/cache@v3
-      if: steps.python-cache.outputs.cache-hit != 'true'
-      with:
-        path: venv
-        key: ${{ runner.os }}-venv-${{ hashFiles('**/*requirements.txt') }}
-
     - name: Display Python version
       run: python -V
       shell: bash

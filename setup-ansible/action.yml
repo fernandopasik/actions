@@ -21,13 +21,6 @@ runs:
       run: ansible-galaxy install -r requirements.yml
       shell: bash
 
-    - name: Save in Cache Ansible Galaxy dependencies
-      uses: actions/cache@v3
-      if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
-      with:
-        path: galaxy
-        key: ansible-galaxy-${{ hashFiles('requirements.yml') }}
-
     - name: Display Ansible version
       run: ansible --version
       shell: bash
