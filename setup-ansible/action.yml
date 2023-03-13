@@ -16,14 +16,6 @@ runs:
         path: ${{ inputs.cache-path }}
         key: ansible-galaxy-${{ hashFiles('requirements.yml') }}
 
-    - name: Display Ansible version
-      run: ansible --version
-      shell: bash
-
-    - name: Display Ansible Galaxy version
-      run: ansible-galaxy --version
-      shell: bash
-
     - name: Install Ansible Galaxy dependencies
       if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
       run: ansible-galaxy install -r requirements.yml
@@ -35,3 +27,11 @@ runs:
       with:
         path: galaxy
         key: ansible-galaxy-${{ hashFiles('requirements.yml') }}
+
+    - name: Display Ansible version
+      run: ansible --version
+      shell: bash
+
+    - name: Display Ansible Galaxy version
+      run: ansible-galaxy --version
+      shell: bash
