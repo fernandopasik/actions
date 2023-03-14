@@ -48,6 +48,7 @@ runs:
         path: |
           node_modules
           .yarn
+          ~/.cache/puppeteer
         key: ${{ runner.os }}-${{ env.PM }}-${{ hashFiles(env.LOCK) }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
