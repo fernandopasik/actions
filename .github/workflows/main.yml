@@ -58,12 +58,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: install-ansible
     steps:
-      - name: Check Ansible installs
-        run: |
-          ansible --version
-          ansible-galaxy --version
-          ansible-lint --version
-        shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
 
