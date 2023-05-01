@@ -7,7 +7,7 @@ on:
 
 jobs:
   install-node:
-    name: Install Node and dependencies
+    name: Install Node
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node
         uses: ./setup-node
   install-python:
-    name: Install Python and dependencies
+    name: Install Python
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Python
         uses: ./setup-python
   install-ansible:
-    name: Install Ansible and dependencies
+    name: Install Ansible
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
         uses: ./setup-ansible
 
   cache-node:
-    name: Check install Node and dependencies
+    name: Check Node cache
     runs-on: ubuntu-latest
     needs: install-node
     steps:
@@ -49,7 +49,7 @@ jobs:
       - name: Setup Node
         uses: ./setup-node
   cache-python:
-    name: Check install Python and dependencies
+    name: Check Python cache
     runs-on: ubuntu-latest
     needs: install-python
     steps:
@@ -58,7 +58,7 @@ jobs:
       - name: Setup Python
         uses: ./setup-python
   cache-ansible:
-    name: Check install Ansible and dependencies
+    name: Check Ansible cache
     runs-on: ubuntu-latest
     needs: install-ansible
     steps:
