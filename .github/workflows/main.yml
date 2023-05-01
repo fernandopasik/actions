@@ -59,8 +59,8 @@ jobs:
       - name: Setup Ansible
         uses: ./setup-ansible
 
-  check-install:
-    name: Check Install and Cache
+  cache-node:
+    name: Check install Node and dependencies
     runs-on: ubuntu-latest
     needs: install-node
     steps:
