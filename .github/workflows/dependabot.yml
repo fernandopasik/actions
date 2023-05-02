@@ -8,4 +8,7 @@ jobs:
     name: Auto review
     runs-on: ubuntu-latest
     steps:
-      - uses: ./auto-review
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Auto Review
+        uses: ./auto-review
