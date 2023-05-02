@@ -38,7 +38,6 @@ jobs:
         shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
-
   cache-node:
     name: Check Node cache
     runs-on: ubuntu-latest
@@ -68,7 +67,6 @@ jobs:
         uses: ./setup-python
       - name: Setup Ansible
         uses: ./setup-ansible
-
   check-format:
     name: Check Format
     runs-on: ubuntu-latest
