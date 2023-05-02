@@ -1,0 +1,27 @@
+name: Auto Review
+description: Auto reviews a PR by approving and enabling automerge
+
+inputs:
+  author:
+    description: 'Author to auto review'
+    default: 'dependabot[bot]'
+  token:
+    description: 'Token to use gh cli'
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Auto approve
+      if: github.actor == ${{ inputs.author }}
+      run: gh pr review ${{ github.event.number }} --repo ${{ github.repository }} --approve
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      shell: bash
+
+    - name: Auto merge
+      if: github.actor == ${{ inputs.author }}
+      run: gh pr merge ${{ github.event.number }} --repo ${{ github.repository }} --auto --squash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      shell: bash

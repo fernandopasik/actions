@@ -1,22 +1,11 @@
 name: Dependabot
 on: pull_request_target
-env:
-  GH_TOKEN: ${{ github.token }}
+permissions:
+  pull-requests: write
 
 jobs:
-  auto-approve:
-    name: Auto approve
+  auto-review:
+    name: Auto review
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    if: github.actor == 'dependabot[bot]'
     steps:
-      - run: gh pr review ${{ github.event.number }} --repo ${{ github.repository }} --approve
-  auto-merge:
-    name: Auto merge
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    if: github.actor == 'dependabot[bot]'
-    steps:
-      - run: gh pr merge ${{ github.event.number }} --repo ${{ github.repository }} --auto --squash
+      - uses: ./auto-review
