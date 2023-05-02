@@ -13,3 +13,13 @@ jobs:
       - run: gh pr review ${{ github.event.number }} --repo ${{ github.repository }} --approve
         env:
           GH_TOKEN: ${{ github.token }}
+  auto-merge:
+    name: Auto merge
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - run: gh pr merge ${{ github.event.number }} --repo ${{ github.repository }} --auto --squash
+        env:
+          GH_TOKEN: ${{ github.token }}
