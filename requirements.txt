@@ -1,2 +1,2 @@
-ansible
-ansible-lint
+ansible==8.*
+ansible-lint==6.*
