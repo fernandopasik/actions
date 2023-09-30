@@ -25,6 +25,10 @@ runs:
       run: ansible --version
       shell: bash
 
+    - name: Display Ansible Lint version
+      run: ansible-lint --version
+      shell: bash
+
     - name: Display Ansible Galaxy version
       run: ansible-galaxy --version
       shell: bash
