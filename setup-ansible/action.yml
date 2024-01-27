@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
     - name: Load Cached Ansible Galaxy dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: ansible-galaxy-cache
       with:
         path: ${{ inputs.cache-path }}

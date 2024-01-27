@@ -42,7 +42,7 @@ runs:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
     - name: Load Cached NPM dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: node-modules-cache
       with:
         path: |
@@ -55,7 +55,7 @@ runs:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
