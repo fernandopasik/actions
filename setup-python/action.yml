@@ -12,7 +12,7 @@ runs:
         key: ${{ runner.os }}-venv-${{ hashFiles('**/*requirements.txt') }}
 
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         cache: ${{ env.CACHE-HIT != 'true' && 'pip' || env.NOTDEFINED }}
         check-latest: true
