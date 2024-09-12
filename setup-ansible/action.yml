@@ -1,3 +1,4 @@
+---
 name: Setup Ansible
 description: Setups latest Ansible and installs Ansible Galaxy dependencies
 
