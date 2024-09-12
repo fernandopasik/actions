@@ -4,7 +4,7 @@ description: Setups latest Node LTS and installs dependencies
 inputs:
   node-version:
     description: 'Node version to install'
-    default: '20'
+    default: '22'
 
 runs:
   using: composite
