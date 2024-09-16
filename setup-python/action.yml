@@ -46,6 +46,6 @@ runs:
           pip install -r requirements.txt
         fi
         if [ -f "requirements-dev.txt" ]; then
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
         fi
       shell: bash
