@@ -2,6 +2,11 @@
 name: Setup Python
 description: Setups latest Python and installs dependencies
 
+inputs:
+  python-version:
+    description: 'Python version to install'
+    default: '3'
+
 runs:
   using: composite
   steps:
@@ -17,7 +22,7 @@ runs:
       with:
         cache: ${{ env.CACHE-HIT != 'true' && 'pip' || env.NOTDEFINED }}
         check-latest: true
-        python-version: 3
+        python-version: ${{ inputs.python-version }}
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
