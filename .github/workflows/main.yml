@@ -8,6 +8,12 @@ on:
   pull_request: {}
 
 jobs:
+  conventional-commits:
+    name: Check Conventional Commit in PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Conventional Commit in PR
+        uses: ./conventional-commits
   install-node:
     name: Install Node
     runs-on: ubuntu-latest

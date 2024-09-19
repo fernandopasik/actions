@@ -1,0 +1,12 @@
+---
+name: Check Conventional Commit in PR
+description: Checks that the PR title adheres to the Conventional Commits specification
+
+runs:
+  using: composite
+  steps:
+    - name: PR Conventional Commit Validation
+      uses: ytanikin/PRConventionalCommits@1
+      with:
+        add_label: 'false'
+        task_types: '["chore","ci","docs","feat","fix","perf","refactor","revert","test"]'
