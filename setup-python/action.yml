@@ -23,6 +23,10 @@ runs:
         cache: ${{ env.CACHE-HIT != 'true' && 'pip' || env.NOTDEFINED }}
         check-latest: true
         python-version: ${{ inputs.python-version }}
+        cache-dependency-path: |
+          **/pyproject.toml
+          **/requirements.txt
+          **/requirements-dev.txt
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
