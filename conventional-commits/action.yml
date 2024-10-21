@@ -6,7 +6,7 @@ runs:
   using: composite
   steps:
     - name: PR Conventional Commit Validation
-      uses: ytanikin/PRConventionalCommits@1
+      uses: ytanikin/PRConventionalCommits@1.3.0
       with:
         add_label: 'false'
         task_types: '["chore","ci","docs","feat","fix","perf","refactor","revert","test"]'
