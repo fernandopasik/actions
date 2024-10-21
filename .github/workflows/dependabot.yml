@@ -15,11 +15,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Auto Review
         uses: ./auto-review
-  conventional-commits:
+
+  pr-conventional-commits:
     name: Check Conventional Commit in PR
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check Conventional Commit in PR
-        uses: ./conventional-commits
+        uses: ./pr-conventional-commits
