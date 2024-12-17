@@ -4,7 +4,7 @@ description: Setups latest Node LTS and installs dependencies
 
 inputs:
   node-version:
-    description: 'Node version to install'
+    description: Node version to install
     default: '22'
 
 runs:

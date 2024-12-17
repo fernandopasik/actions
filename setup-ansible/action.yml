@@ -4,8 +4,8 @@ description: Setups latest Ansible and installs Ansible Galaxy dependencies
 
 inputs:
   cache-path:
-    description: 'Folder to download Ansible Galaxy dependencies'
-    default: 'galaxy'
+    description: Folder to download Ansible Galaxy dependencies
+    default: galaxy
 
 runs:
   using: composite

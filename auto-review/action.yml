@@ -4,10 +4,10 @@ description: Auto reviews a PR by approving and enabling automerge
 
 inputs:
   author:
-    description: 'Author to auto review'
-    default: 'dependabot[bot]'
+    description: Author to auto review
+    default: dependabot[bot]
   token:
-    description: 'Token to use gh cli'
+    description: Token to use gh cli
     default: ${{ github.token }}
 
 runs:
