@@ -4,8 +4,8 @@ My collection of github actions
 
 <!-- BADGES - START -->
 
-[![Build Status](https://github.com/fernandopasik/actions/actions/workflows/main.yml/badge.svg)](https://github.com/fernandopasik/actions/actions/workflows/main.yml 'Build Status')
-[![Known Vulnerabilities](https://snyk.io/test/github/fernandopasik/actions/badge.svg?targetFile=package.json)](https://snyk.io/test/github/fernandopasik/actions?targetFile=package.json 'Known Vulnerabilities')
+[![Build Status](https://github.com/fernandopasik/actions/actions/workflows/main.yml/badge.svg)](https://github.com/fernandopasik/actions/actions/workflows/main.yml "Build Status")
+[![Known Vulnerabilities](https://snyk.io/test/github/fernandopasik/actions/badge.svg?targetFile=package.json)](https://snyk.io/test/github/fernandopasik/actions?targetFile=package.json "Known Vulnerabilities")
 
 <!-- BADGES - END -->
 
@@ -29,26 +29,25 @@ jobs:
 
 ### Auto Review
 
-Automatically approves and sets automerge to a PR.
-A username can be provided or by default auto review Dependabot PRs.
+Automatically approves and sets automerge to a PR. A username can be provided or by default auto
+review Dependabot PRs.
 
 ### Setup Ansible
 
-Setup Ansible and install its dependencies.
-An `ansible.cfg` file and `requirements.yml` can be provided to guide what galaxy packages to install and where.
-_Depends on having Python available_ or it can be installed by the **Setup Python** action.
+Setup Ansible and install its dependencies. An `ansible.cfg` file and `requirements.yml` can be
+provided to guide what galaxy packages to install and where. _Depends on having Python available_ or
+it can be installed by the **Setup Python** action.
 
 ### Setup Node
 
-Setup Node.js and dependencies. A custom version can be provided, otherwise will use LTS.
-Can be used with any of the package managers: npm, yarn or pnpm.
-Caches and loads local node_modules folder.
+Setup Node.js and dependencies. A custom version can be provided, otherwise will use LTS. Can be
+used with any of the package managers: npm, yarn or pnpm. Caches and loads local node_modules
+folder.
 
 ### Setup Python
 
-Setup Python and install its dependencies.
-A `requirements.txt` can be provided to detail the list of python dependencies.
-Displays both Python and Pip versions. Caches and loads from local folder.
+Setup Python and install its dependencies. A `requirements.txt` can be provided to detail the list
+of python dependencies. Displays both Python and Pip versions. Caches and loads from local folder.
 
 ## License
 
