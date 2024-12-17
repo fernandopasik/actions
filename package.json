@@ -1,0 +1,13 @@
+{
+  "name": "actions",
+  "type": "module",
+  "description": "My collection of github actions",
+  "repository": "fernandopasik/actions",
+  "author": "Fernando Pasik <fernando@pasik.com.ar> (https://fernandopasik.com)",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0"
+  }
+}
