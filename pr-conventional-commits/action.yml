@@ -10,3 +10,5 @@ runs:
       with:
         add_label: 'false'
         task_types: '["build", "chore", "ci", "docs", "feat", "fix", "perf", "refactor", "revert", "test"]'
+    - name: Lint PR commits
+      uses: wagoid/commitlint-github-action@v6
