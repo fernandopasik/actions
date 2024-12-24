@@ -1,5 +1,5 @@
 ansible==10.4.0
-ansible-lint==24.9.2
+ansible-lint==24.12.2
 mdformat==0.7.21
 mdformat-frontmatter==2.0.8
 mdformat-gfm==0.4.1
