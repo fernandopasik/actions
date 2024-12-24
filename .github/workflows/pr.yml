@@ -19,6 +19,7 @@ jobs:
   pr-conventional-commits:
     name: Check Conventional Commit in PR
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
