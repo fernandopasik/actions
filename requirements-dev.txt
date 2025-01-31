@@ -1,6 +1,6 @@
 ansible==11.2.0
 ansible-lint==25.1.1
-mdformat==0.7.21
+mdformat==0.7.22
 mdformat-frontmatter==2.0.8
 mdformat-gfm==0.4.1
 pre-commit==4.1.0
