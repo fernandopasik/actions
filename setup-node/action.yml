@@ -67,6 +67,7 @@ runs:
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
         cache: ${{ env.CACHE-HIT != 'true' && env.PM || env.NOTDEFINED }}
+        cache-dependency-path: ${{ inputs.working-directory }}
         check-latest: true
         node-version: ${{ inputs.node-version }}
       env:
