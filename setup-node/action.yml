@@ -12,9 +12,6 @@ inputs:
 
 runs:
   using: composite
-  defaults:
-    run:
-      working-directory: ${{ inputs.working-directory }}
   steps:
     - name: Detect Node Package Manager
       id: detect-node-pm
@@ -38,12 +35,14 @@ runs:
           echo "node-lock=package-lock.json" >> $GITHUB_OUTPUT
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Node Package Manager
       run: |
         echo Package Manager Name: ${{ env.PM }}
         echo Package Manager Lock File: ${{ env.LOCK }}
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
@@ -77,6 +76,7 @@ runs:
     - name: Display Node version
       run: node -v
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Package Manager version
       run: |
@@ -88,6 +88,7 @@ runs:
           npm -v
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
@@ -104,5 +105,6 @@ runs:
           npm ci
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
