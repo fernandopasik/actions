@@ -12,7 +12,9 @@ inputs:
 
 runs:
   using: composite
-  working-directory: ${{ inputs.working-directory }}
+  defaults:
+    run:
+      working-directory: ${{ inputs.working-directory }}
   steps:
     - name: Detect Node Package Manager
       id: detect-node-pm
