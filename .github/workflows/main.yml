@@ -10,26 +10,24 @@ jobs:
   setup-node-npm:
     name: Install Node with npm
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./test/setup-node/npm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: ./setup-node
+        width:
+          working-directory: ./test/setup-node/npm
   cache-node-npm:
     name: Check Node cache with npm
     runs-on: ubuntu-latest
     needs: setup-node-npm
-    defaults:
-      run:
-        working-directory: ./test/setup-node/npm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: ./setup-node
+        width:
+          working-directory: ./test/setup-node/npm
   install-python:
     name: Install Python
     runs-on: ubuntu-latest

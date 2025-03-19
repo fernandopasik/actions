@@ -6,9 +6,13 @@ inputs:
   node-version:
     description: Node version to install
     default: '22'
+  working-directory:
+    description: Action working directory
+    default: .
 
 runs:
   using: composite
+  working-directory: ${{ inputs.working-directory }}
   steps:
     - name: Detect Node Package Manager
       id: detect-node-pm
