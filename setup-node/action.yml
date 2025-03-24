@@ -6,6 +6,9 @@ inputs:
   node-version:
     description: Node version to install
     default: '22'
+  working-directory:
+    description: Action working directory
+    default: .
 
 runs:
   using: composite
@@ -32,12 +35,14 @@ runs:
           echo "node-lock=package-lock.json" >> $GITHUB_OUTPUT
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Node Package Manager
       run: |
         echo Package Manager Name: ${{ env.PM }}
         echo Package Manager Lock File: ${{ env.LOCK }}
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
@@ -62,6 +67,7 @@ runs:
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
         cache: ${{ env.CACHE-HIT != 'true' && env.PM || env.NOTDEFINED }}
+        cache-dependency-path: ${{ inputs.working-directory }}
         check-latest: true
         node-version: ${{ inputs.node-version }}
       env:
@@ -71,6 +77,7 @@ runs:
     - name: Display Node version
       run: node -v
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Package Manager version
       run: |
@@ -82,6 +89,7 @@ runs:
           npm -v
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
@@ -98,5 +106,6 @@ runs:
           npm ci
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       env:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
