@@ -25,5 +25,3 @@ lerna-debug.log*
 .pnpm-debug.log*
 pnpm-lock.yaml
 yarn.lock
-
-# build and temp folders
