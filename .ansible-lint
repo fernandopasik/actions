@@ -1,0 +1,8 @@
+---
+# .ansible-lint
+profile: production
+exclude_paths:
+  - .ansible
+  - .venv
+skip_list:
+  - var-naming[no-role-prefix]
