@@ -1,0 +1,6 @@
+Django==5.2
+djangorestframework==3.16.0
+langchain==0.3.24
+langchain-anthropic==0.3.12
+langchain-core==0.3.56
+pydantic==2.11.3
