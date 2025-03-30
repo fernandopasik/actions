@@ -37,8 +37,8 @@ jobs:
         uses: ./setup-python
       - name: Lint
         run: make lint
-  setup-node-npm:
-    name: Install Node with npm
+  test-setup-node-npm:
+    name: Test Setup Node with npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,10 +47,10 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/npm
-  cache-node-npm:
-    name: Check Node cache with npm
+  test-cache-node-npm:
+    name: Test Node cache with npm
     runs-on: ubuntu-latest
-    needs: setup-node-npm
+    needs: test-setup-node-npm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -58,8 +58,8 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/npm
-  setup-python:
-    name: Install Python
+  test-setup-python:
+    name: Test Setup Python
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -68,10 +68,10 @@ jobs:
         uses: ./setup-python
         with:
           working-directory: ./test/setup-python
-  cache-python:
-    name: Check Python cache
+  test-cache-python:
+    name: Test Python cache
     runs-on: ubuntu-latest
-    needs: setup-python
+    needs: test-setup-python
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -79,8 +79,8 @@ jobs:
         uses: ./setup-python
         with:
           working-directory: ./test/setup-python
-  install-ansible:
-    name: Install Ansible
+  test-setup-ansible:
+    name: Test Setup Ansible
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -95,10 +95,10 @@ jobs:
         shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
-  cache-ansible:
-    name: Check Ansible cache
+  test-cache-ansible:
+    name: Test Ansible cache
     runs-on: ubuntu-latest
-    needs: install-ansible
+    needs: test-setup-ansible
     steps:
       - name: Checkout
         uses: actions/checkout@v4
