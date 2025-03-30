@@ -89,12 +89,6 @@ jobs:
         uses: ./setup-python
         with:
           working-directory: ./test/setup-ansible
-      - name: Check Ansible installs
-        run: |
-          ansible --version
-          ansible-galaxy --version
-          ansible-lint --version
-        shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
         with:
