@@ -56,10 +56,12 @@ runs:
           node_modules
           .yarn
           ~/.cache/puppeteer
-        key: ${{ runner.os }}-${{ env.PM }}-${{ hashFiles(env.LOCK) }}
+        key: ${{ env.CACHE-PREFIX }}-${{ env.HASHED }}
       env:
-        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
-        LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
+        CACHE-PREFIX: |
+          setup-node-internal-${{ runner.os }}-${{ runner.arch }}-${{ steps.detect-node-pm.outputs.node-pm }}
+        HASHED: |
+          ${{ hashFiles('${{ steps.detect-node-pm.outputs.node-lock }}') }}
 
     - name: Install Node.js
       uses: actions/setup-node@v4
