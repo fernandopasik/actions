@@ -17,8 +17,9 @@ runs:
       uses: actions/cache@v4
       id: python-cache
       with:
-        path: .venv
-        key: ${{ runner.os }}-venv-${{ hashFiles('**/*requirements.txt','**/*requirements-dev.txt') }}
+        path: ${{ inputs.working-directory }}/.venv
+        # yamllint disable-line rule:line-length
+        key: ${{ runner.os }}-venv-${{ hashFiles('${{ inputs.working-directory }}/**/*requirements.txt','${{ inputs.working-directory }}/**/*requirements-dev.txt') }}
 
     - name: Install Python
       uses: actions/setup-python@v5
