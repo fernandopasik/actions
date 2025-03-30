@@ -61,7 +61,7 @@ runs:
         CACHE-PREFIX: |
           setup-node-internal-${{ runner.os }}-${{ runner.arch }}-${{ steps.detect-node-pm.outputs.node-pm }}
         HASHED: |
-          ${{ hashFiles('${{ steps.detect-node-pm.outputs.node-lock }}') }}
+          ${{ hashFiles(${{ steps.detect-node-pm.outputs.node-lock }}) }}
 
     - name: Install Node.js
       uses: actions/setup-node@v4
