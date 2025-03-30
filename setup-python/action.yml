@@ -22,10 +22,10 @@ runs:
       env:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
         HASHED: |
-          hashFiles(
+          ${{ hashFiles(
             '${{ inputs.working-directory }}/**/*requirements.txt',
             '${{ inputs.working-directory }}/**/requirements-dev.txt'
-          )
+          ) }}
 
     - name: Install Python
       uses: actions/setup-python@v5
