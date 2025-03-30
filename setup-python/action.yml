@@ -6,6 +6,9 @@ inputs:
   python-version:
     description: Python version to install
     default: '3'
+  working-directory:
+    description: Action working directory
+    default: .
 
 runs:
   using: composite
@@ -29,14 +32,17 @@ runs:
           **/requirements-dev.txt
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Python version
       run: python -V
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Pip version
       run: pip -V
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Activate Python Virtual Env
       # Enables venv and stores its path for follow-up steps
@@ -45,6 +51,7 @@ runs:
         . .venv/bin/activate
         echo PATH=$PATH >> $GITHUB_ENV
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Install Python Dependencies
       if: steps.python-cache.outputs.cache-hit != 'true'
@@ -58,3 +65,4 @@ runs:
           pip install -r requirements-dev.txt
         fi
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
