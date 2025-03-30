@@ -6,6 +6,9 @@ inputs:
   cache-path:
     description: Folder to download Ansible Galaxy dependencies
     default: .ansible
+  working-directory:
+    description: Action working directory
+    default: .
 
 runs:
   using: composite
@@ -21,15 +24,19 @@ runs:
       if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
       run: ansible-galaxy install -r requirements.yml
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Ansible version
       run: ansible --version
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Ansible Lint version
       run: ansible-lint --version
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Ansible Galaxy version
       run: ansible-galaxy --version
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
