@@ -32,7 +32,6 @@ runs:
           **/requirements-dev.txt
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
-      working-directory: ${{ inputs.working-directory }}
 
     - name: Display Python version
       run: python -V
