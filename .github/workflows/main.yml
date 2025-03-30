@@ -87,6 +87,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Python
         uses: ./setup-python
+        with:
+          working-directory: ./test/setup-ansible
       - name: Check Ansible installs
         run: |
           ansible --version
@@ -95,6 +97,8 @@ jobs:
         shell: bash
       - name: Setup Ansible
         uses: ./setup-ansible
+        with:
+          working-directory: ./test/setup-ansible
   test-cache-ansible:
     name: Test Ansible cache
     runs-on: ubuntu-latest
@@ -104,5 +108,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Python
         uses: ./setup-python
+        with:
+          working-directory: ./test/setup-ansible
       - name: Setup Ansible
         uses: ./setup-ansible
+        with:
+          working-directory: ./test/setup-ansible
