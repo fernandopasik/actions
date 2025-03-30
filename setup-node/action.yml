@@ -19,20 +19,21 @@ runs:
       # npm, pnpm, yarn1, yarn2
       # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
       run: |
+        WD=${{ inputs.working-directory }}
         if [ -f "yarn.lock" ]; then
           if [ -d ".yarn" ]; then
             echo "node-pm=yarn2" >> $GITHUB_OUTPUT
-            echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
+            echo "node-lock=$WD/yarn.lock" >> $GITHUB_OUTPUT
           else
             echo "node-pm=yarn1" >> $GITHUB_OUTPUT
-            echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
+            echo "node-lock=$WD/yarn.lock" >> $GITHUB_OUTPUT
           fi
         elif [ -f "pnpm-lock.yaml" ]; then
           echo "node-pm=pnpm" >> $GITHUB_OUTPUT
-          echo "node-lock=pnpm-lock.yaml" >> $GITHUB_OUTPUT
+          echo "node-lock=$WD/pnpm-lock.yaml" >> $GITHUB_OUTPUT
         else
           echo "node-pm=npm" >> $GITHUB_OUTPUT
-          echo "node-lock=package-lock.json" >> $GITHUB_OUTPUT
+          echo "node-lock=$WD/package-lock.json" >> $GITHUB_OUTPUT
         fi
       shell: bash
       working-directory: ${{ inputs.working-directory }}
