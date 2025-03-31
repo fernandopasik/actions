@@ -16,13 +16,13 @@ runs:
     - name: Detect Node Package Manager
       id: detect-node-pm
       # Detect supported package managers by actions/setup-node
-      # npm, pnpm, yarn1, yarn2
+      # npm, pnpm, yarn1, yarn
       # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
       run: |
         WD=${{ inputs.working-directory }}
         if [ -f "yarn.lock" ]; then
           if [ -d ".yarn" ]; then
-            echo "node-pm=yarn2" >> $GITHUB_OUTPUT
+            echo "node-pm=yarn" >> $GITHUB_OUTPUT
             echo "node-lock=$WD/yarn.lock" >> $GITHUB_OUTPUT
           else
             echo "node-pm=yarn1" >> $GITHUB_OUTPUT
@@ -83,7 +83,7 @@ runs:
 
     - name: Display Package Manager version
       run: |
-        if [ $PM == "yarn1" ] || [ $PM == "yarn2" ]; then
+        if [ $PM == "yarn1" ] || [ $PM == "yarn" ]; then
           yarn -v
         elif [ $PM == "pnpm" ]; then
           pnpm -v
@@ -100,7 +100,7 @@ runs:
       run: |
         if [ $PM == "yarn1" ]; then
           yarn install --frozen-lockfile
-        elif [ $PM == "yarn2" ]; then
+        elif [ $PM == "yarn" ]; then
           yarn --immutable
         elif [ $PM == "pnpm" ]; then
           pnpm install --frozen-lockfile
