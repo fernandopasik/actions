@@ -50,7 +50,7 @@ runs:
 
     - name: Enable Corepack
       run: |
-        if [ $PM != "npm" ]
+        if [ $PM != "npm" ]; then
           corepack enable
         fi
       shell: bash
