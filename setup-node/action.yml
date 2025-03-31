@@ -48,6 +48,14 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
+    - name: Enable Corepack
+      run: |
+        if [ $PM != "npm" ]
+          corepack enable
+        fi
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
     - name: Load Cached NPM dependencies
       uses: actions/cache@v4
       id: node-modules-cache
