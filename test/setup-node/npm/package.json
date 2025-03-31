@@ -17,6 +17,7 @@
     "ajv": "^8.17.1",
     "astro": "^5.7.5",
     "express": "^5.1.0",
+    "graphql": "^16.11.0",
     "graphql-sequelize": "^9.5.1",
     "graphql-tag": "^2.12.6",
     "ioredis": "^5.6.1",
@@ -33,6 +34,8 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.25.1",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^3.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@size-limit/file": "^11.2.0",
     "@storybook/addon-a11y": "^8.6.12",
@@ -80,9 +83,7 @@
     "wrangler": "^4.13.2"
   },
   "overrides": {
-    "esbuild": "^0.25.1",
     "react-reconciler": "^0.31.0",
-    "tap": "^21.1.0",
-    "youch": "^3.3.4"
+    "tap": "^21.1.0"
   }
 }
