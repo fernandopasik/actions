@@ -1,3 +1,4 @@
+---
 lockfileVersion: '9.0'
 
 settings:
@@ -9743,8 +9744,8 @@ snapshots:
       log-update: 5.0.1
       sisteransi: 1.0.5
 
-  '@astrojs/cloudflare@12.5.1(@types/node@22.15.2)(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)':
-    dependencies:
+  ? '@astrojs/cloudflare@12.5.1(@types/node@22.15.2)(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)'
+  : dependencies:
       '@astrojs/internal-helpers': 0.6.1
       '@astrojs/underscore-redirects': 0.6.1
       '@cloudflare/workers-types': 4.20250427.0
@@ -9843,8 +9844,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.2.5(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))':
-    dependencies:
+  ? '@astrojs/mdx@4.2.5(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))'
+  : dependencies:
       '@astrojs/markdown-remark': 6.3.1
       '@mdx-js/mdx': 3.1.0(acorn@8.14.1)
       acorn: 8.14.1
@@ -9862,8 +9863,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.2.1(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))':
-    dependencies:
+  ? '@astrojs/node@9.2.1(astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1))'
+  : dependencies:
       '@astrojs/internal-helpers': 0.6.1
       astro: 5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1)
       send: 1.2.0
@@ -9871,8 +9872,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/preact@4.0.10(@babel/core@7.26.10)(@types/node@22.15.2)(jiti@2.4.2)(preact@10.26.5)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)':
-    dependencies:
+  ? '@astrojs/preact@4.0.10(@babel/core@7.26.10)(@types/node@22.15.2)(jiti@2.4.2)(preact@10.26.5)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1)'
+  : dependencies:
       '@preact/preset-vite': 2.10.1(@babel/core@7.26.10)(preact@10.26.5)(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
       '@preact/signals': 2.0.4(preact@10.26.5)
       preact: 10.26.5
@@ -10995,8 +10996,8 @@ snapshots:
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
 
-  '@csstools/css-color-parser@3.0.9(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)':
-    dependencies:
+  ? '@csstools/css-color-parser@3.0.9(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)'
+  : dependencies:
       '@csstools/color-helpers': 5.0.2
       '@csstools/css-calc': 2.1.3(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
@@ -11008,8 +11009,8 @@ snapshots:
 
   '@csstools/css-tokenizer@3.0.3': {}
 
-  '@csstools/media-query-list-parser@4.0.2(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)':
-    dependencies:
+  ? '@csstools/media-query-list-parser@4.0.2(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)'
+  : dependencies:
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
 
@@ -12172,8 +12173,8 @@ snapshots:
     dependencies:
       playwright: 1.49.1
 
-  '@preact/preset-vite@2.10.1(@babel/core@7.26.10)(preact@10.26.5)(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))':
-    dependencies:
+  ? '@preact/preset-vite@2.10.1(@babel/core@7.26.10)(preact@10.26.5)(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))'
+  : dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-development': 7.25.9(@babel/core@7.26.10)
@@ -12802,8 +12803,8 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@storybook/builder-vite@8.6.12(storybook@8.6.12(prettier@3.5.3))(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))':
-    dependencies:
+  ? '@storybook/builder-vite@8.6.12(storybook@8.6.12(prettier@3.5.3))(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))'
+  : dependencies:
       '@storybook/csf-plugin': 8.6.12(storybook@8.6.12(prettier@3.5.3))
       browser-assert: 1.2.1
       storybook: 8.6.12(prettier@3.5.3)
@@ -12861,8 +12862,8 @@ snapshots:
     dependencies:
       storybook: 8.6.12(prettier@3.5.3)
 
-  '@storybook/preact-vite@8.6.12(preact@10.26.5)(storybook@8.6.12(prettier@3.5.3))(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))':
-    dependencies:
+  ? '@storybook/preact-vite@8.6.12(preact@10.26.5)(storybook@8.6.12(prettier@3.5.3))(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))'
+  : dependencies:
       '@storybook/builder-vite': 8.6.12(storybook@8.6.12(prettier@3.5.3))(vite@6.3.3(@types/node@22.15.2)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))
       '@storybook/preact': 8.6.12(preact@10.26.5)(storybook@8.6.12(prettier@3.5.3))
       preact: 10.26.5
@@ -12924,8 +12925,8 @@ snapshots:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       is-actual-promise: 1.0.2
 
-  '@tapjs/asserts@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(react-dom@19.1.0(react@18.3.1))(react@18.3.1)':
-    dependencies:
+  ? '@tapjs/asserts@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(react-dom@19.1.0(react@18.3.1))(react@18.3.1)'
+  : dependencies:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       '@tapjs/stack': 2.0.1
       is-actual-promise: 1.0.2
@@ -12949,8 +12950,8 @@ snapshots:
     dependencies:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
 
-  '@tapjs/config@3.1.6(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))':
-    dependencies:
+  ? '@tapjs/config@3.1.6(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))'
+  : dependencies:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       '@tapjs/test': 2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       chalk: 5.4.1
@@ -13022,8 +13023,8 @@ snapshots:
       signal-exit: 4.1.0
       uuid: 8.3.2
 
-  '@tapjs/reporter@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))':
-    dependencies:
+  ? '@tapjs/reporter@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))'
+  : dependencies:
       '@tapjs/config': 3.1.6(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       '@tapjs/stack': 2.0.1
@@ -13046,8 +13047,8 @@ snapshots:
       - react-dom
       - utf-8-validate
 
-  '@tapjs/run@2.1.7(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@18.3.1)':
-    dependencies:
+  ? '@tapjs/run@2.1.7(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@18.3.1)'
+  : dependencies:
       '@tapjs/after': 1.1.31(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
       '@tapjs/before': 2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
       '@tapjs/config': 3.1.6(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
@@ -13088,8 +13089,8 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@tapjs/snapshot@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(react-dom@19.1.0(react@18.3.1))(react@18.3.1)':
-    dependencies:
+  ? '@tapjs/snapshot@2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(react-dom@19.1.0(react@18.3.1))(react@18.3.1)'
+  : dependencies:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
       is-actual-promise: 1.0.2
       tcompare: 7.0.1(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
@@ -13108,8 +13109,8 @@ snapshots:
     dependencies:
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
 
-  '@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)':
-    dependencies:
+  ? '@tapjs/test@2.2.4(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)'
+  : dependencies:
       '@isaacs/ts-node-temp-fork-for-pr-2009': 10.9.7(@types/node@22.15.2)(typescript@5.4.5)
       '@tapjs/after': 1.1.31(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
       '@tapjs/after-each': 2.0.8(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))
@@ -13146,8 +13147,8 @@ snapshots:
       - react
       - react-dom
 
-  '@tapjs/typescript@1.4.13(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(typescript@5.4.5)':
-    dependencies:
+  ? '@tapjs/typescript@1.4.13(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(typescript@5.4.5)'
+  : dependencies:
       '@isaacs/ts-node-temp-fork-for-pr-2009': 10.9.7(@types/node@22.15.2)(typescript@5.4.5)
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
@@ -13156,8 +13157,8 @@ snapshots:
       - '@types/node'
       - typescript
 
-  '@tapjs/typescript@1.4.13(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(typescript@5.8.3)':
-    dependencies:
+  ? '@tapjs/typescript@1.4.13(@tapjs/core@2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1))(@types/node@22.15.2)(typescript@5.8.3)'
+  : dependencies:
       '@isaacs/ts-node-temp-fork-for-pr-2009': 10.9.7(@types/node@22.15.2)(typescript@5.8.3)
       '@tapjs/core': 2.1.6(@types/node@22.15.2)(react-dom@19.1.0(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
@@ -13362,8 +13363,8 @@ snapshots:
       '@types/node': 22.15.2
     optional: true
 
-  '@typescript-eslint/eslint-plugin@8.31.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)':
-    dependencies:
+  ? '@typescript-eslint/eslint-plugin@8.31.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)'
+  : dependencies:
       '@eslint-community/regexpp': 4.12.1
       '@typescript-eslint/parser': 8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)
       '@typescript-eslint/scope-manager': 8.31.0
@@ -13838,8 +13839,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  artillery-plugin-apdex@1.13.0(@types/node@22.15.2)(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@18.3.1)(typescript@5.8.3):
-    dependencies:
+  ? artillery-plugin-apdex@1.13.0(@types/node@22.15.2)(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@18.3.1)(typescript@5.8.3)
+  : dependencies:
       tap: 19.2.5(@types/node@22.15.2)(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@18.3.1)(typescript@5.8.3)
     transitivePeerDependencies:
       - '@swc/core'
@@ -14011,8 +14012,8 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1):
-    dependencies:
+  ? astro@5.7.5(@azure/identity@4.9.1)(@azure/storage-blob@12.27.0)(@types/node@22.15.2)(encoding@0.1.13)(ioredis@5.6.1)(jiti@2.4.2)(rollup@4.40.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.3)(yaml@2.7.1)
+  : dependencies:
       '@astrojs/compiler': 2.11.0
       '@astrojs/internal-helpers': 0.6.1
       '@astrojs/markdown-remark': 6.3.1
@@ -15193,8 +15194,8 @@ snapshots:
     dependencies:
       present: 0.0.3
 
-  drizzle-orm@0.31.4(@cloudflare/workers-types@4.20250427.0)(@libsql/client@0.15.4)(@opentelemetry/api@1.9.0)(@types/react@19.1.2)(react@18.3.1):
-    optionalDependencies:
+  ? drizzle-orm@0.31.4(@cloudflare/workers-types@4.20250427.0)(@libsql/client@0.15.4)(@opentelemetry/api@1.9.0)(@types/react@19.1.2)(react@18.3.1)
+  : optionalDependencies:
       '@cloudflare/workers-types': 4.20250427.0
       '@libsql/client': 0.15.4
       '@opentelemetry/api': 1.9.0
@@ -15505,8 +15506,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.3.4)(eslint@9.25.1(jiti@2.4.2)):
-    dependencies:
+  ? eslint-module-utils@2.12.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.3.4)(eslint@9.25.1(jiti@2.4.2))
+  : dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)
@@ -15516,8 +15517,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.3.4)(eslint@9.25.1(jiti@2.4.2)):
-    dependencies:
+  ? eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.3.4)(eslint@9.25.1(jiti@2.4.2))
+  : dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.6
@@ -15550,8 +15551,8 @@ snapshots:
       eslint: 9.25.1(jiti@2.4.2)
       globals: 13.24.0
 
-  eslint-plugin-prettier@5.2.6(eslint-config-prettier@10.1.2(eslint@9.25.1(jiti@2.4.2)))(eslint@9.25.1(jiti@2.4.2))(prettier@3.5.3):
-    dependencies:
+  ? eslint-plugin-prettier@5.2.6(eslint-config-prettier@10.1.2(eslint@9.25.1(jiti@2.4.2)))(eslint@9.25.1(jiti@2.4.2))(prettier@3.5.3)
+  : dependencies:
       eslint: 9.25.1(jiti@2.4.2)
       prettier: 3.5.3
       prettier-linter-helpers: 1.0.0

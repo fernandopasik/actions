@@ -1,7 +1,6 @@
 ---
 extends: default
 ignore:
-  - '**/node_modules'
   - .venv
 
 rules:
