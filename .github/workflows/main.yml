@@ -58,6 +58,27 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/npm
+  test-setup-node-pnpm:
+    name: Test Setup Node with pnpm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/pnpm
+  test-cache-node-pnpm:
+    name: Test Node cache with pnpm
+    runs-on: ubuntu-latest
+    needs: test-setup-node-pnpm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/pnpm
   test-setup-python:
     name: Test Setup Python
     runs-on: ubuntu-latest
