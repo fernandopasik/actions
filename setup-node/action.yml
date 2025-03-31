@@ -64,7 +64,6 @@ runs:
         path: |
           node_modules
           .yarn
-          ~/.cache/puppeteer
         key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
         CACHE-PREFIX: setup-node-internal-${{ runner.os }}-${{ runner.arch }}
