@@ -2,6 +2,8 @@
 extends: default
 ignore:
   - .venv
+  - '**/node_modules'
+  - '**/pnpm-lock.yaml'
 
 rules:
   line-length:
