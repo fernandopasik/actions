@@ -105,7 +105,7 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
     - name: Check cached dependencies size
-      run: find . -type d -name "node_modules" | grep -v '\(node_modules.*\)\{2,\}' | xargs -r du -sh
+      run: find . -type d -name "node_modules" | { grep -v '\(node_modules.*\)\{2,\}' || true; } | xargs -r du -sh
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
