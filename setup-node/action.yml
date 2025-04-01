@@ -52,14 +52,13 @@ runs:
       id: node-modules-cache
       with:
         path: |
-          $WDIR/node_modules
-          $WDIR/.yarn
+          ${{ inputs.working-directory }}/node_modules
+          ${{ inputs.working-directory }}/.yarn
         key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
         CACHE-PREFIX: setup-node-internal-${{ runner.os }}-${{ runner.arch }}
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
-        WDIR: ${{ inputs.working-directory }}
 
     - name: Enable Corepack
       run: |
