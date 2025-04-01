@@ -107,7 +107,7 @@ runs:
     - name: Check cached dependencies size
       run: |
         ls -la
-        find . -type d -name "node_modules" | grep -vE "(node_modules.*){2,}" | xargs -r du -sh
+        find . -path "*/node_modules" -type d -prune -print | xargs -r du -sh
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
