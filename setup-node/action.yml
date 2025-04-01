@@ -78,10 +78,11 @@ runs:
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
         cache: ${{ (env.CACHE-HIT != 'true' && env.PM) || '' }}
-        cache-dependency-path: ${{ inputs.working-directory }}
+        cache-dependency-path: ${{ inputs.working-directory }}/${{ env.LOCK }}
         check-latest: true
         node-version: ${{ inputs.node-version }}
       env:
+        LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
