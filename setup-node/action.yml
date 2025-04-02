@@ -96,13 +96,14 @@ runs:
 
     - name: Display Package Manager version
       run: |
-        if [ $PM == "yarn1" ] || [ $PM == "yarn" ]; then
-          yarn -v
-        elif [ $PM == "pnpm" ]; then
-          pnpm -v
-        else
-          npm -v
-        fi
+        VERSION=$(
+          case "$PM" in
+            yarn1|yarn) yarn -v ;;
+            pnpm) pnpm -v ;;
+            *) npm -v ;;
+          esac
+        )
+        echo "::notice title=Package Manager Version::$PM version: $VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
