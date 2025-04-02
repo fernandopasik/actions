@@ -100,6 +100,27 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/yarn1
+  test-setup-node-yarn:
+    name: Test Setup Node with yarn
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn
+  test-cache-node-yarn:
+    name: Test Node cache with yarn
+    runs-on: ubuntu-latest
+    needs: test-setup-node-yarn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn
   test-setup-python:
     name: Test Setup Python
     runs-on: ubuntu-latest
