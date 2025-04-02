@@ -22,16 +22,20 @@ runs:
         if [ -f "yarn.lock" ]; then
           if [ -d ".yarn" ]; then
             echo "node-pm=yarn" >> $GITHUB_OUTPUT
+            echo "node-cache=yarn" >> $GITHUB_OUTPUT
             echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
           else
             echo "node-pm=yarn1" >> $GITHUB_OUTPUT
+            echo "node-cache=yarn" >> $GITHUB_OUTPUT
             echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
           fi
         elif [ -f "pnpm-lock.yaml" ]; then
           echo "node-pm=pnpm" >> $GITHUB_OUTPUT
+          echo "node-cache=pnpm" >> $GITHUB_OUTPUT
           echo "node-lock=pnpm-lock.yaml" >> $GITHUB_OUTPUT
         else
           echo "node-pm=npm" >> $GITHUB_OUTPUT
+          echo "node-cache=npm" >> $GITHUB_OUTPUT
           echo "node-lock=package-lock.json" >> $GITHUB_OUTPUT
         fi
       shell: bash
@@ -76,13 +80,13 @@ runs:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
         # https://github.com/actions/setup-node#usage
-        cache: ${{ (env.CACHE-HIT != 'true' && env.PM) || '' }}
+        cache: ${{ (env.CACHE-HIT != 'true' && env.CACHE) || '' }}
         cache-dependency-path: ${{ inputs.working-directory }}/${{ env.LOCK }}
         check-latest: true
         node-version: ${{ inputs.node-version }}
       env:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
-        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+        CACHE: ${{ steps.detect-node-pm.outputs.node-cache }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
     - name: Display Node version
