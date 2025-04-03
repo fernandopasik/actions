@@ -96,6 +96,7 @@ runs:
 
     - name: Display Package Manager version
       run: |
+        echo "::group::📦 Display Package Manager version"
         VERSION=$(
           case "$PM" in
             yarn1|yarn) yarn -v ;;
@@ -104,6 +105,7 @@ runs:
           esac
         )
         echo "::notice title=Package Manager Version::$PM version: $VERSION"
+        echo "::endgroup::"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
