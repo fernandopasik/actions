@@ -2,5 +2,6 @@ number = true
 wrap = 100
 exclude = [
   ".venv/**",
+  "**/node_modules/**",
   "CODE_OF_CONDUCT.md",
 ]
