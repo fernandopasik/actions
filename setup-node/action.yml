@@ -19,25 +19,26 @@ runs:
       # npm, pnpm, yarn1, yarn
       # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
       run: |
+        echo
         if [ -f "yarn.lock" ]; then
-          if [ -d ".yarn" ]; then
-            echo "node-pm=yarn" >> $GITHUB_OUTPUT
-            echo "node-cache=yarn" >> $GITHUB_OUTPUT
-            echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
-          else
-            echo "node-pm=yarn1" >> $GITHUB_OUTPUT
-            echo "node-cache=yarn" >> $GITHUB_OUTPUT
-            echo "node-lock=yarn.lock" >> $GITHUB_OUTPUT
-          fi
+          [ -d ".yarn" ] && PM="yarn" || PM="yarn1"
+          CACHE="yarn"
+          LOCK="yarn.lock"
         elif [ -f "pnpm-lock.yaml" ]; then
-          echo "node-pm=pnpm" >> $GITHUB_OUTPUT
-          echo "node-cache=pnpm" >> $GITHUB_OUTPUT
-          echo "node-lock=pnpm-lock.yaml" >> $GITHUB_OUTPUT
+          PM="pnpm"
+          CACHE="pnpm"
+          LOCK="pnpm-lock.yaml"
         else
-          echo "node-pm=npm" >> $GITHUB_OUTPUT
-          echo "node-cache=npm" >> $GITHUB_OUTPUT
-          echo "node-lock=package-lock.json" >> $GITHUB_OUTPUT
+          PM="npm"
+          CACHE="npm"
+          LOCK="package-lock.json"
         fi
+
+        {
+          echo "node-pm=$PM"
+          echo "node-cache=$CACHE"
+          echo "node-lock=$LOCK"
+        } >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
