@@ -114,6 +114,7 @@ runs:
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: |
+        echo
         echo "::group::📦 Installing dependencies"
         case "$PM" in
           yarn1) yarn install --frozen-lockfile ;;
