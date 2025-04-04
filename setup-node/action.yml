@@ -115,17 +115,12 @@ runs:
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: |
         echo "::group::📦 Installing dependencies"
-
-        if [ $PM == "yarn1" ]; then
-          yarn install --frozen-lockfile
-        elif [ $PM == "yarn" ]; then
-          yarn --immutable
-        elif [ $PM == "pnpm" ]; then
-          pnpm install --frozen-lockfile
-        else
-          npm ci
-        fi
-
+        case "$PM" in
+          yarn1) yarn install --frozen-lockfile ;;
+          yarn) yarn --immutable ;;
+          pnpm) pnpm install --frozen-lockfile ;;
+          *) npm ci ;;
+        esac
         echo "::endgroup::"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
