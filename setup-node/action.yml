@@ -13,7 +13,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Detect Node Package Manager
+    - name: Detect Node.js Package Manager
       id: detect-node-pm
       # Detect supported package managers by actions/setup-node
       # npm, pnpm, yarn1, yarn
@@ -39,18 +39,13 @@ runs:
           echo "node-cache=$CACHE"
           echo "node-lock=$LOCK"
         } >> "$GITHUB_OUTPUT"
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
 
-    - name: Display Node Package Manager
-      run: |
-        echo Package Manager Name: ${{ env.PM }}
-        echo Package Manager Lock File: ${{ env.LOCK }}
+        echo "::debug::--- 📦 Node.js Package Manager ---"
+        echo "::debug::Package Manager Name: ${{ PM }}"
+        echo "::debug::Package Manager Cache Type: ${{ CACHE }}"
+        echo "::debug::Package Manager Lock File: ${{ LOCK }}"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      env:
-        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
-        LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
 
     - name: Load Cached NPM dependencies
       uses: actions/cache@v4
