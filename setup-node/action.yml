@@ -129,13 +129,15 @@ runs:
 
     - name: Calculate dependencies size
       run: |
-        echo "📦⚖️ Calculating dependencies size"
+        printf "\033[1;37;44m                                     \033[0m\n"
+        printf "\033[1;37;44m 📦⚖️ Calculating dependencies size \033[0m\n"
+        printf "\033[1;37;44m                                     \033[0m\n"
 
         find . -path "*/node_modules" -type d -prune -print | \
         xargs -r du -sm | \
         sort -nr | \
         while read -r size path; do
-          printf "\033[1;35m%4sM\033[0m %s\n" "$size" "$path"
+          printf "\033[1;35m %4sM \033[0m %s\n" "$size" "$path"
         done
       shell: bash
       working-directory: ${{ inputs.working-directory }}
