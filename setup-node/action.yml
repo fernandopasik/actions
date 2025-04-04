@@ -130,7 +130,7 @@ runs:
     - name: Calculate dependencies size
       run: |
         echo
-        printf "\033[0;30;44m 📦⚖️ Calculating dependencies size \033[0m\n"
+        echo 📦⚖️ Calculating dependencies size
 
         find . -path "*/node_modules" -type d -prune -print | \
         xargs -r du -sm | \
