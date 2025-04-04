@@ -129,7 +129,7 @@ runs:
 
     - name: Calculate dependencies size
       run: |
-        echo "📦⚖️ Calculating dependencies "$size"
+        echo "📦⚖️ Calculating dependencies size"
 
         find . -path "*/node_modules" -type d -prune -print | \
         xargs -r du -sm | \
