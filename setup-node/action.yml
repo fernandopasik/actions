@@ -20,8 +20,14 @@ runs:
       # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
       run: |
         echo
+        CACHE_PATH=${{ inputs.working-directory }}/node_modules
         if [ -f "yarn.lock" ]; then
-          [ -d ".yarn" ] && PM="yarn" || PM="yarn1"
+          if [ -d ".yarn" ]; then
+            PM="yarn"
+            CACHE_PATH="$CACHE_PATH\n${{ inputs.working-directory }}/.yarn"
+          else
+            PM="yarn1"
+          fi
           CACHE="yarn"
           LOCK="yarn.lock"
         elif [ -f "pnpm-lock.yaml" ]; then
@@ -37,11 +43,15 @@ runs:
         echo "node-pm=$PM" >> "$GITHUB_OUTPUT"
         echo "node-cache=$CACHE" >> "$GITHUB_OUTPUT"
         echo "node-lock=$LOCK" >> "$GITHUB_OUTPUT"
+        echo "cache-path<<EOF" >> "$GITHUB_OUTPUT"
+        echo -e "$CACHE_PATH" >> "$GITHUB_OUTPUT"
+        echo "EOF" >> "$GITHUB_OUTPUT"
 
         echo "::debug::--- 📦 Node.js Package Manager ---"
         echo "::debug::Package Manager Name: $PM"
         echo "::debug::Package Manager Cache Type: $CACHE"
         echo "::debug::Package Manager Lock File: $LOCK"
+        echo "::debug::Cache Paths:\n$CACHE_PATH"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -49,11 +59,10 @@ runs:
       uses: actions/cache@v4
       id: node-modules-cache
       with:
-        path: |
-          ${{ inputs.working-directory }}/node_modules
-          ${{ inputs.working-directory }}/.yarn
+        path: ${{ env.CACHE-PATH }}
         key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
+        CACHE-PATH: steps.detect-node-pm.outputs.cache-path
         CACHE-PREFIX: setup-node-${{ inputs.node-version }}-internal-${{ runner.os }}-${{ runner.arch }}
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
