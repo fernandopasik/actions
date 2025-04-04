@@ -54,7 +54,7 @@ runs:
           ${{ inputs.working-directory }}/.yarn
         key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
-        CACHE-PREFIX: setup-node-internal-${{ runner.os }}-${{ runner.arch }}
+        CACHE-PREFIX: setup-node-${{ inputs.node-version }}-internal-${{ runner.os }}-${{ runner.arch }}
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
