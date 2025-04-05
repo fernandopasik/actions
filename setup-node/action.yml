@@ -43,9 +43,7 @@ runs:
         echo "node-pm=$PM" >> "$GITHUB_OUTPUT"
         echo "node-cache=$CACHE" >> "$GITHUB_OUTPUT"
         echo "node-lock=$LOCK" >> "$GITHUB_OUTPUT"
-        echo "cache-path<<EOF" >> "$GITHUB_OUTPUT"
-        echo -e "$CACHE_PATH" >> "$GITHUB_OUTPUT"
-        echo "EOF" >> "$GITHUB_OUTPUT"
+        printf "cache-path<<EOF\n%s\nEOF\n" "$CACHE_PATH" >> "$GITHUB_OUTPUT"
 
         echo "::debug::--- 📦 Node.js Package Manager ---"
         echo "::debug::Package Manager Name: $PM"
