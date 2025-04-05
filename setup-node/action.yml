@@ -67,16 +67,6 @@ runs:
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
-    - name: Enable Corepack
-      run: |
-        if [ $PM != "npm" ]; then
-          corepack enable
-        fi
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      env:
-        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
-
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
@@ -91,6 +81,16 @@ runs:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
         CACHE: ${{ steps.detect-node-pm.outputs.node-cache }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
+
+    - name: Enable Corepack
+      run: |
+        if [ $PM != "npm" ]; then
+          corepack enable
+        fi
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
     - name: Display Node.js and Package Manager versions
       run: |
