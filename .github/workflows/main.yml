@@ -121,6 +121,32 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/yarn
+  delete-setup-node-test-cache:
+    name: Delete Setup Node tests cache
+    runs-on: ubuntu-latest
+    needs:
+      - test-setup-node-npm
+      - test-setup-node-pnpm
+      - test-setup-node-yarn1
+      - test-setup-node-yarn
+    steps:
+      - name: Github API cache delete
+        run: |
+          echo
+          SETUP_NODE_KEYS=$(gh cache list --key setup-node --json key \
+            --template '{{range .}}{{.key}}{{"\n"}}{{end}}')
+          NODE_CACHE_KEYS=$(gh cache list --key node-cache --json key \
+            --template '{{range .}}{{.key}}{{"\n"}}{{end}}')
+          CACHE_KEYS="$SETUP_NODE_KEYS"$'\n'"$NODE_CACHE_KEYS"
+
+          echo "💾 Cache keys to delete"
+          echo "$CACHE_KEYS"
+
+          echo "$CACHE_KEYS" | while IFS= read -r KEY; do
+            echo "❌ Deleting cache key: $KEY"
+            gh cache delete "$KEY"
+          done
+        shell: bash
   test-setup-python:
     name: Test Setup Python
     runs-on: ubuntu-latest
