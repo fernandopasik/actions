@@ -30,6 +30,7 @@ runs:
       # https://github.com/actions/setup-node/blob/main/src/cache-utils.ts
       run: |
         echo
+        echo "📦 Detecting Node.js Package Manager"
         CACHE_PATH=${{ inputs.working-directory }}/node_modules
         if [ -f "yarn.lock" ]; then
           if [ -d ".yarn" ] || [ -f ".yarnrc.yml" ]; then
@@ -55,6 +56,7 @@ runs:
         echo "node-lock=$LOCK" >> "$GITHUB_OUTPUT"
         printf "cache-path<<EOF\n%s\nEOF\n" "$CACHE_PATH" >> "$GITHUB_OUTPUT"
 
+        echo "📦 Detected Node.js Package Manager: $PM"
         echo "::debug::--- 📦 Node.js Package Manager ---"
         echo "::debug::Package Manager Name: $PM"
         echo "::debug::Package Manager Cache Type: $CACHE"
