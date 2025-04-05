@@ -13,6 +13,18 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Detect Node.js version
+      id: detect-node-version
+      run: |
+        NODE_VERSION_FILE=$(cat .node-version 2>/dev/null)
+        NVMRC=$(cat .nvmrc 2>/dev/null)
+
+        NODE_VERSION=$($NODE_VERSION_FILE || $NVMRC) | sed -e "s/^v//" || ${{ inputs.node-version }}
+
+        echo "node-version=$NODE_VERSION" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
     - name: Detect Node.js Package Manager
       id: detect-node-pm
       # Detect supported package managers by actions/setup-node
@@ -58,19 +70,20 @@ runs:
       id: node-modules-cache
       with:
         path: ${{ env.CACHE-PATH }}
-        key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
+        key: ${{ env.CACHE-PREFIX }}-${{ RUNNER }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
         CACHE-PATH: ${{ steps.detect-node-pm.outputs.cache-path }}
-        CACHE-PREFIX: setup-node-${{ inputs.node-version }}-internal-${{ runner.os }}-${{ runner.arch }}
+        CACHE-PREFIX: setup-node-${{ steps.detect-node-version.outputs.node-version }}-internal
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
+        RUNNER: ${{ runner.os }}-${{ runner.arch }}
 
     - name: Prepare Node.js
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
       uses: actions/setup-node@v4
       with:
         check-latest: true
-        node-version: ${{ inputs.node-version }}
+        node-version: ${{ steps.detect-node-version.outputs.node-version }}
 
     - name: Enable Corepack
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
@@ -98,7 +111,7 @@ runs:
         cache: ${{ (env.CACHE-HIT != 'true' && env.CACHE) || '' }}
         cache-dependency-path: ${{ inputs.working-directory }}/${{ env.LOCK }}
         check-latest: true
-        node-version: ${{ inputs.node-version }}
+        node-version: ${{ steps.detect-node-version.outputs.node-version }}
       env:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
         CACHE: ${{ steps.detect-node-pm.outputs.node-cache }}
