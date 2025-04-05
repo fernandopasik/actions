@@ -16,7 +16,7 @@ runs:
     - name: Detect Node.js version
       id: detect-node-version
       run: |
-        NODE_VERSION=$(cat .node-version 2>/dev/null || cat .nvmrc 2>/dev/null || echo "${{ inputs.node-version }})
+        NODE_VERSION=$(cat .node-version 2>/dev/null || cat .nvmrc 2>/dev/null || echo "${{ inputs.node-version }}")
         NODE_VERSION=$(echo "$NODE_VERSION" | sed 's/^v//')
 
         echo "node-version=$NODE_VERSION" >> "$GITHUB_OUTPUT"
