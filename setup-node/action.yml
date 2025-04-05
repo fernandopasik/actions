@@ -5,7 +5,7 @@ description: Setups latest Node LTS and installs dependencies
 inputs:
   node-version:
     description: Node version to install
-    default: '22'
+    default: lts
   working-directory:
     description: Action working directory
     default: .
