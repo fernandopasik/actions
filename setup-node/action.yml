@@ -67,6 +67,13 @@ runs:
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
+    - name: Prepare Node.js
+      if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
+      uses: actions/setup-node@v4
+      with:
+        check-latest: true
+        node-version: ${{ inputs.node-version }}
+
     - name: Enable Corepack
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
       run: |
