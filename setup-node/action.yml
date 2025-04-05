@@ -71,9 +71,14 @@ runs:
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
       run: |
         echo
-        echo 📦⚙️ Enabling Corepack for $PM
+        echo "📦⚙️ Enabling Corepack for $PM"
         corepack enable
-        corepack prepare $PM@latest --activate
+
+        PM_VERSION=$(node -pe "try{require('./package.json').packageManager}catch{}")
+        [ -z "$PM_VERSION" ] && PM_VERSION="$PM@latest"
+
+        echo "📦⚙️ Preparing Corepack for $PM_VERSION"
+        corepack prepare "$PM_VERSION" --activate
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
