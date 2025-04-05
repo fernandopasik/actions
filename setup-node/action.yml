@@ -62,7 +62,7 @@ runs:
         path: ${{ env.CACHE-PATH }}
         key: ${{ env.CACHE-PREFIX }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
-        CACHE-PATH: steps.detect-node-pm.outputs.cache-path
+        CACHE-PATH: ${{ steps.detect-node-pm.outputs.cache-path }}
         CACHE-PREFIX: setup-node-${{ inputs.node-version }}-internal-${{ runner.os }}-${{ runner.arch }}
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
