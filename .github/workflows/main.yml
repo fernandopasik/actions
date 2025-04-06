@@ -143,13 +143,16 @@ jobs:
             --template '{{range .}}{{.key}}{{"\n"}}{{end}}')
           CACHE_KEYS="$SETUP_NODE_KEYS"$'\n'"$NODE_CACHE_KEYS"
 
-          echo "💾 Cache keys to delete"
+          echo "::group::💾 Cache keys to delete"
           echo "$CACHE_KEYS"
+          echo "::endgroup::"
 
+          echo "::group::❌ Deleting cache keys"
           echo "$CACHE_KEYS" | while IFS= read -r KEY; do
             echo "❌ Deleting cache key: $KEY"
             gh cache delete "$KEY"
           done
+          echo "::endgroup::"
         shell: bash
     env:
       GH_TOKEN: ${{ github.token }}
