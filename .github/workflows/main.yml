@@ -125,10 +125,10 @@ jobs:
     name: Delete Setup Node tests cache
     runs-on: ubuntu-latest
     needs:
-      - test-setup-node-npm
-      - test-setup-node-pnpm
-      - test-setup-node-yarn1
-      - test-setup-node-yarn
+      - test-cache-node-npm
+      - test-cache-node-pnpm
+      - test-cache-node-yarn1
+      - test-cache-node-yarn
     steps:
       - name: Github API cache delete
         run: |
