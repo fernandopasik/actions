@@ -147,6 +147,8 @@ jobs:
             gh cache delete "$KEY"
           done
         shell: bash
+    env:
+      GH_TOKEN: ${{ github.token }}
   test-setup-python:
     name: Test Setup Python
     runs-on: ubuntu-latest
