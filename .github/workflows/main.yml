@@ -129,6 +129,8 @@ jobs:
       - test-cache-node-pnpm
       - test-cache-node-yarn1
       - test-cache-node-yarn
+    permissions:
+      actions: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
