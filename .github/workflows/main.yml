@@ -130,6 +130,8 @@ jobs:
       - test-cache-node-yarn1
       - test-cache-node-yarn
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Github API cache delete
         run: |
           echo
