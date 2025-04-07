@@ -33,8 +33,12 @@ runs:
     - name: Display Ansible and tools versions
       run: |
         echo
-        echo "🅰️ Ansible version: $(ansible --version)"
-        echo "🅰️ Ansible Lint version: $(ansible-lint --version)"
-        echo "🅰️ Ansible Galaxy: $(ansible-galaxy --version)"
+        ANSIBLE_VERSION=$(ansible --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p' | tr -d '\n')
+        ANSIBLE_LINT_VERSION=$(ansible-lint --version | sed -n '1s/^ansible-lint \x1b\[1;36m\([0-9.]*\).*/\1/p')
+        ANSIBLE_GALAXY_VERSION=$(ansible-galaxy --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p')
+
+        echo "🅰️ Ansible version: $ANSIBLE_VERSION"
+        echo "🅰️ Ansible Lint version: $ANSIBLE_LINT_VERSION"
+        echo "🅰️ Ansible Galaxy: $ANSIBLE_GALAXY_VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
