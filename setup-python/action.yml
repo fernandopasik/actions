@@ -54,6 +54,8 @@ runs:
     - name: Activate Python Virtual Env
       # Enables venv and stores its path for follow-up steps
       run: |
+        echo
+        echo 🐍 Activating Python Virtual Env
         python -m venv ${{ inputs.venv-dir }}
         . ${{ inputs.venv-dir }}/bin/activate
         echo PATH=$PATH >> $GITHUB_ENV
