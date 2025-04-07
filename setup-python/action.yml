@@ -59,7 +59,7 @@ runs:
           python -m venv ${{ inputs.venv-dir }}
         fi
 
-        VENV_PATH="${{ inputs.working-directory }}/${{ inputs.venv-dir }}/bin"
+        VENV_PATH="$(realpath "${{ inputs.venv-dir }}/bin")"
         echo "🐍 Adding Python Virtual Env $VENV_PATH to PATH"
         echo "$VENV_PATH" >> $GITHUB_PATH
       shell: bash
