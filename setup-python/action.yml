@@ -46,8 +46,8 @@ runs:
     - name: Display Python and Pip versions
       run: |
         echo
-        echo 🐍 Python version: $(python -V)
-        echo 🐍 Pip version: $(pip -V)
+        echo "🐍 Python version: $(python -V)"
+        echo "🐍 Pip version: $(pip -V)"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
