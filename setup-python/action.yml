@@ -66,10 +66,14 @@ runs:
         python -m venv ${{ inputs.venv-dir }}
         . ${{ inputs.venv-dir }}/bin/activate
         if [ -f "requirements.txt" ]; then
+          echo "::group::🐍 Installing dependencies"
           pip install -r requirements.txt
+          echo "::endgroup::"
         fi
         if [ -f "requirements-dev.txt" ]; then
+          echo "::group::🐍 Installing dev dependencies"
           pip install -r requirements-dev.txt
+          echo "::endgroup::"
         fi
       shell: bash
       working-directory: ${{ inputs.working-directory }}
