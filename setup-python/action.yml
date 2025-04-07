@@ -37,9 +37,9 @@ runs:
         check-latest: true
         python-version: ${{ inputs.python-version }}
         cache-dependency-path: |
-          **/pyproject.toml
-          **/requirements.txt
-          **/requirements-dev.txt
+          ${{ inputs.working-directory }}/**/pyproject.toml
+          ${{ inputs.working-directory }}/**/requirements.txt
+          ${{ inputs.working-directory }}/**/requirements-dev.txt
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
