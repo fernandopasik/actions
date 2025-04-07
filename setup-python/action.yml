@@ -65,8 +65,7 @@ runs:
     - name: Install Python Dependencies
       if: steps.python-cache.outputs.cache-hit != 'true'
       run: |
-        python -m venv ${{ inputs.venv-dir }}
-        . ${{ inputs.venv-dir }}/bin/activate
+        echo
         if [ -f "requirements.txt" ]; then
           echo "::group::🐍 Installing dependencies"
           pip install -r requirements.txt
