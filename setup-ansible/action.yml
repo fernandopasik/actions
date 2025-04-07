@@ -34,7 +34,7 @@ runs:
       run: |
         echo
         ANSIBLE_VERSION=$(ansible --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p' | tr -d '\n')
-        ANSIBLE_LINT_VERSION=$(ansible-lint --version | sed -n '1s/^ansible-lint \x1b\[1;36m\([0-9.]*\).*/\1/p')
+        ANSIBLE_LINT_VERSION=$(ansible-lint --version --nocolor | sed -n '1s/^ansible-lint \([0-9.]*\).*/\1/p')
         ANSIBLE_GALAXY_VERSION=$(ansible-galaxy --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p')
 
         echo "🅰️ Ansible version: $ANSIBLE_VERSION"
