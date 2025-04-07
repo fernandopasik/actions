@@ -41,12 +41,12 @@ runs:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
     - name: Display Python version
-      run: python -V
+      run: 'echo 🐍 Python version: $(python -V)'
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
     - name: Display Pip version
-      run: pip -V
+      run: 'echo 🐍 Pip version: $(pip -V)'
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
