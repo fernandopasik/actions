@@ -26,17 +26,11 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
-    - name: Display Ansible version
-      run: ansible --version
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-
-    - name: Display Ansible Lint version
-      run: ansible-lint --version
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-
-    - name: Display Ansible Galaxy version
-      run: ansible-galaxy --version
+    - name: Display Ansible and tools versions
+      run: |
+        echo
+        echo "🅰️ Ansible version: $(ansible --version)"
+        echo "🅰️ Ansible Lint version: $(ansible-lint --version)"
+        echo "🅰️ Ansible Galaxy: $(ansible-galaxy --version)"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
