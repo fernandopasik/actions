@@ -51,15 +51,16 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
-    - name: Activate Python Virtual Env
-      # Enables venv and stores its path for follow-up steps
+    - name: Create Python Virtual Env
       run: |
         echo
-        echo 🐍 Activating Python Virtual Env
-        python -m venv ${{ inputs.venv-dir }}
-        . ${{ inputs.venv-dir }}/bin/activate
+        if [ ! -d "${{ inputs.venv-dir }}" ]; then
+          echo "🐍 Creating Python Virtual Env"
+          python -m venv ${{ inputs.venv-dir }}
+        fi
 
         VENV_PATH="${{ inputs.working-directory }}/${{ inputs.venv-dir }}/bin"
+        echo "🐍 Adding Python Virtual Env $VENV_PATH to PATH"
         echo "$VENV_PATH" >> $GITHUB_PATH
       shell: bash
       working-directory: ${{ inputs.working-directory }}
@@ -68,6 +69,9 @@ runs:
       if: steps.python-cache.outputs.cache-hit != 'true'
       run: |
         echo
+        echo "🐍 Activating Python Virtual Env"
+        . ${{ inputs.venv-dir }}/bin/activate
+
         if [ -f "requirements.txt" ]; then
           echo "::group::🐍 Installing dependencies"
           pip install -r requirements.txt
