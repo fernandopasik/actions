@@ -38,7 +38,7 @@ runs:
         if [ -f "yarn.lock" ]; then
           if [ -d ".yarn" ] || [ -f ".yarnrc.yml" ]; then
             PM="yarn"
-            CACHE_PATH="$CACHE_PATH\n${{ inputs.working-directory }}/.yarn"
+            CACHE_PATH="$CACHE_PATH$(echo -e "\n${{ inputs.working-directory }}/.yarn")"
           else
             PM="yarn1"
           fi
@@ -57,7 +57,9 @@ runs:
         echo "node-pm=$PM" >> "$GITHUB_OUTPUT"
         echo "node-cache=$CACHE" >> "$GITHUB_OUTPUT"
         echo "node-lock=$LOCK" >> "$GITHUB_OUTPUT"
-        ( echo "cache-path<<EOF"; printf "%s\n" "$CACHE_PATH"; echo "EOF" ) >> "$GITHUB_OUTPUT"
+        echo "cache-path<<EOF" >> "$GITHUB_OUTPUT"
+        echo "$CACHE_PATH" >> "$GITHUB_OUTPUT"
+        echo "EOF" >> "$GITHUB_OUTPUT"
 
         echo "📦 Detected Node.js Package Manager: $PM"
         echo "::debug::--- 📦 Node.js Package Manager ---"
