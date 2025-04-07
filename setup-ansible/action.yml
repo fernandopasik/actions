@@ -22,7 +22,11 @@ runs:
 
     - name: Install Ansible Galaxy dependencies
       if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
-      run: ansible-galaxy install -r requirements.yml
+      run: |
+        echo
+        echo "::group::🅰️ Installing Ansible Galaxy dependencies"
+        ansible-galaxy install -r requirements.yml
+        echo "::endgroup::"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
