@@ -58,7 +58,9 @@ runs:
         echo 🐍 Activating Python Virtual Env
         python -m venv ${{ inputs.venv-dir }}
         . ${{ inputs.venv-dir }}/bin/activate
-        echo PATH=$PATH >> $GITHUB_ENV
+
+        VENV_PATH="${{ inputs.working-directory }}/${{ inputs.venv-dir }}/bin"
+        echo "$VENV_PATH" >> $GITHUB_PATH
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
