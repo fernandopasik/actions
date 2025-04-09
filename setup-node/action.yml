@@ -14,6 +14,9 @@ outputs:
   node-version:
     description: Installed Node.js version
     value: ${{ steps.display-installed-versions.outputs.node-version }}
+  package-manager:
+    description: Node.js Package Manager
+    value: ${{ steps.detect-node-pm.outputs.node-pm }}
   package-manager-version:
     description: Installed Node.js Package Manager version
     value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
