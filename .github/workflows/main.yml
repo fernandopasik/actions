@@ -51,6 +51,9 @@ jobs:
     name: Test Node cache with npm
     runs-on: ubuntu-latest
     needs: test-setup-node-npm
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-npm.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-npm.outputs.jobs-cache-file }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -68,16 +71,21 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-npm.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-npm.outputs.jobs-cache-file }}"
         shell: bash
-  # delete-cache-node-npm:
-  #   name: Delete Node cache with npm
-  #   runs-on: ubuntu-latest
-  #   needs: test-cache-node-npm
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - uses: ./.github/actions/delete-cache
-  #       with:
-  #         hashed-files: ./test/setup-node/npm/node_modules
+  delete-cache-node-npm:
+    name: Delete Node cache with npm
+    runs-on: ubuntu-latest
+    needs: test-cache-node-npm
+    steps:
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-npm.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-npm.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
   test-setup-node-pnpm:
     name: Test Setup Node with pnpm
     runs-on: ubuntu-latest
