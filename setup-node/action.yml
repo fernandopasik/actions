@@ -13,10 +13,10 @@ inputs:
 outputs:
   node-version:
     description: Installed Node.js version
-    value: ${{ steps.detect-node-version.outputs.node-version }}
+    value: ${{ steps.display-installed-versions.outputs.node-version }}
   package-manager-version:
     description: Installed Node.js Package Manager version
-    value: ${{ steps.detect-node-version.outputs.package-manager-version }}
+    value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
 
 runs:
   using: composite
@@ -130,8 +130,8 @@ runs:
         CACHE: ${{ steps.detect-node-pm.outputs.node-cache }}
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
-    - name: Display Node.js and Package Manager versions
-      id: detect-versions
+    - name: Display installed Node.js and Package Manager versions
+      id: display-installed-versions
       run: |
         echo
         NODE_VERSION=$(node -v)
