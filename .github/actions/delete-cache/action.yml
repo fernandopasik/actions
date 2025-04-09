@@ -1,0 +1,32 @@
+---
+name: Delete Cache
+description: Deletes the tests caches
+
+inputs:
+  hashed-files:
+    description: Files used for the cache hash
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Github API cache delete
+      run: |
+        echo
+        HASH=${{ hashFiles(inputs.hashed-files) }}
+        CACHE_KEYS=$(gh cache list --json key \
+            --template '{{range .}}{{.key}}{{"\n"}}{{end}}' \
+            | grep "$HASH")
+        echo "💾 Cache keys to delete"
+        echo "$CACHE_KEYS"
+
+        echo "$CACHE_KEYS" | while IFS= read -r KEY; do
+          echo "❌ Deleting cache key: $KEY"
+          gh cache delete "$KEY"
+        done
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
