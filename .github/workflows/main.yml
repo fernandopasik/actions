@@ -44,6 +44,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/npm
+  test-cache-node-npm:
+    name: Test Node cache with npm
+    runs-on: ubuntu-latest
+    needs: test-setup-node-npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
         id: test-setup-node-npm
         uses: ./setup-node
         with:
@@ -57,17 +68,6 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-npm.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-npm.outputs.jobs-cache-file }}"
         shell: bash
-  test-cache-node-npm:
-    name: Test Node cache with npm
-    runs-on: ubuntu-latest
-    needs: test-setup-node-npm
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: ./setup-node
-        with:
-          working-directory: ./test/setup-node/npm
   # delete-cache-node-npm:
   #   name: Delete Node cache with npm
   #   runs-on: ubuntu-latest
@@ -85,6 +85,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/pnpm
+  test-cache-node-pnpm:
+    name: Test Node cache with pnpm
+    runs-on: ubuntu-latest
+    needs: test-setup-node-pnpm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
         id: test-setup-node-pnpm
         uses: ./setup-node
         with:
@@ -98,20 +109,20 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-pnpm.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache-file }}"
         shell: bash
-  test-cache-node-pnpm:
-    name: Test Node cache with pnpm
+  test-setup-node-yarn1:
+    name: Test Setup Node with yarn1
     runs-on: ubuntu-latest
-    needs: test-setup-node-pnpm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: ./setup-node
         with:
-          working-directory: ./test/setup-node/pnpm
-  test-setup-node-yarn1:
-    name: Test Setup Node with yarn1
+          working-directory: ./test/setup-node/yarn1
+  test-cache-node-yarn1:
+    name: Test Node cache with yarn1
     runs-on: ubuntu-latest
+    needs: test-setup-node-yarn1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -129,20 +140,20 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn1.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache-file }}"
         shell: bash
-  test-cache-node-yarn1:
-    name: Test Node cache with yarn1
+  test-setup-node-yarn:
+    name: Test Setup Node with yarn
     runs-on: ubuntu-latest
-    needs: test-setup-node-yarn1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: ./setup-node
         with:
-          working-directory: ./test/setup-node/yarn1
-  test-setup-node-yarn:
-    name: Test Setup Node with yarn
+          working-directory: ./test/setup-node/yarn
+  test-cache-node-yarn:
+    name: Test Node cache with yarn
     runs-on: ubuntu-latest
+    needs: test-setup-node-yarn
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -160,17 +171,6 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn.outputs.jobs-cache-file }}"
         shell: bash
-  test-cache-node-yarn:
-    name: Test Node cache with yarn
-    runs-on: ubuntu-latest
-    needs: test-setup-node-yarn
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: ./setup-node
-        with:
-          working-directory: ./test/setup-node/yarn
   # delete-setup-node-test-cache:
   #   name: Delete Setup Node tests cache
   #   runs-on: ubuntu-latest
