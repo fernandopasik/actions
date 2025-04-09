@@ -50,6 +50,7 @@ jobs:
           working-directory: ./test/setup-node/npm
       - name: Display Setup Node outputs
         run: |
+          echo
           echo "🔎 node-version: ${{ steps.test-setup-node-npm.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-npm.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-npm.outputs.package-manager-version }}"
@@ -88,6 +89,7 @@ jobs:
           working-directory: ./test/setup-node/pnpm
       - name: Display Setup Node outputs
         run: |
+          echo
           echo "🔎 node-version: ${{ steps.test-setup-node-pnpm.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-pnpm.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-pnpm.outputs.package-manager-version }}"
@@ -116,6 +118,7 @@ jobs:
           working-directory: ./test/setup-node/yarn1
       - name: Display Setup Node outputs
         run: |
+          echo
           echo "🔎 node-version: ${{ steps.test-setup-node-yarn1.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-yarn1.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn1.outputs.package-manager-version }}"
@@ -144,6 +147,7 @@ jobs:
           working-directory: ./test/setup-node/yarn
       - name: Display Setup Node outputs
         run: |
+          echo
           echo "🔎 node-version: ${{ steps.test-setup-node-yarn.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-yarn.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn.outputs.package-manager-version }}"
