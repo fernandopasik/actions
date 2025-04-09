@@ -14,10 +14,9 @@ runs:
     - name: Github API cache delete
       run: |
         echo
-        HASH=${{ hashFiles(inputs.hashed-files) }}
         CACHE_KEYS=$(gh cache list --json key \
             --template '{{range .}}{{.key}}{{"\n"}}{{end}}' \
-            | grep "$HASH")
+            | grep "${{ env.HASH }}")
         echo "💾 Cache keys to delete"
         echo "$CACHE_KEYS"
 
@@ -27,4 +26,5 @@ runs:
         done
       shell: bash
       env:
+        HASH: ${{ hashFiles(inputs.hashed-files) }}
         GH_TOKEN: ${{ github.token }}
