@@ -10,6 +10,14 @@ inputs:
     description: Action working directory
     default: .
 
+outputs:
+  node-version:
+    description: Installed Node.js version
+    value: ${{ steps.detect-node-version.outputs.node-version }}
+  package-manager-version:
+    description: Installed Node.js Package Manager version
+    value: ${{ steps.detect-node-version.outputs.package-manager-version }}
+
 runs:
   using: composite
   steps:
@@ -123,17 +131,21 @@ runs:
         CACHE-HIT: ${{ steps.node-modules-cache.outputs.cache-hit }}
 
     - name: Display Node.js and Package Manager versions
+      id: detect-versions
       run: |
         echo
-        VERSION=$(
+        NODE_VERSION=$(node -v)
+        PM_VERSION=$(
           case "$PM" in
             yarn1|yarn) yarn -v ;;
             pnpm) pnpm -v ;;
             *) npm -v ;;
           esac
         )
-        echo "📦 Node.js version: $(node -v)"
-        echo "📦 $PM version: $VERSION"
+        echo "node-version=$NODE_VERSION" >> $GITHUB_OUTPUT
+        echo "package-manager-version=$PM_VERSION" >> $GITHUB_OUTPUT
+        echo "📦 Node.js version: $NODE_VERSION"
+        echo "📦 $PM version: $PM_VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
