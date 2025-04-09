@@ -58,6 +58,14 @@ jobs:
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/npm
+  delete-cache-node-npm:
+    name: Delete Node cache with npm
+    runs-on: ubuntu-latest
+    needs: test-cache-node-npm
+    steps:
+      - uses: ./.github/actions/delete-cache
+        with:
+          hashed-files: ./test/setup-node/npm/node_modules
   test-setup-node-pnpm:
     name: Test Setup Node with pnpm
     runs-on: ubuntu-latest
