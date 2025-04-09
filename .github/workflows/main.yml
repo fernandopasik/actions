@@ -81,9 +81,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
+        id: test-setup-node-pnpm
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/pnpm
+      - name: Display Setup Node outputs
+        run: |
+          echo "🔎 node-version: ${{ steps.test-setup-node-pnpm.outputs.node-version }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-pnpm.outputs.package-manager-version }}"
+        shell: bash
   test-cache-node-pnpm:
     name: Test Node cache with pnpm
     runs-on: ubuntu-latest
@@ -102,9 +108,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
+        id: test-setup-node-yarn1
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/yarn1
+      - name: Display Setup Node outputs
+        run: |
+          echo "🔎 node-version: ${{ steps.test-setup-node-yarn1.outputs.node-version }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn1.outputs.package-manager-version }}"
+        shell: bash
   test-cache-node-yarn1:
     name: Test Node cache with yarn1
     runs-on: ubuntu-latest
@@ -123,9 +135,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
+        id: test-setup-node-yarn
         uses: ./setup-node
         with:
           working-directory: ./test/setup-node/yarn
+      - name: Display Setup Node outputs
+        run: |
+          echo "🔎 node-version: ${{ steps.test-setup-node-yarn.outputs.node-version }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn.outputs.package-manager-version }}"
+        shell: bash
   test-cache-node-yarn:
     name: Test Node cache with yarn
     runs-on: ubuntu-latest
