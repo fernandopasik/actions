@@ -54,6 +54,8 @@ jobs:
           echo "🔎 node-version: ${{ steps.test-setup-node-npm.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-npm.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-npm.outputs.package-manager-version }}"
+          echo "🔎 global-cache: ${{ steps.test-setup-node-npm.outputs.global-cache }}"
+          echo "🔎 jobs-cache: ${{ steps.test-setup-node-npm.outputs.jobs-cache }}"
         shell: bash
   test-cache-node-npm:
     name: Test Node cache with npm
@@ -93,6 +95,8 @@ jobs:
           echo "🔎 node-version: ${{ steps.test-setup-node-pnpm.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-pnpm.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-pnpm.outputs.package-manager-version }}"
+          echo "🔎 global-cache: ${{ steps.test-setup-node-pnpm.outputs.global-cache }}"
+          echo "🔎 jobs-cache: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache }}"
         shell: bash
   test-cache-node-pnpm:
     name: Test Node cache with pnpm
@@ -122,6 +126,8 @@ jobs:
           echo "🔎 node-version: ${{ steps.test-setup-node-yarn1.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-yarn1.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn1.outputs.package-manager-version }}"
+          echo "🔎 global-cache: ${{ steps.test-setup-node-yarn1.outputs.global-cache }}"
+          echo "🔎 jobs-cache: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache }}"
         shell: bash
   test-cache-node-yarn1:
     name: Test Node cache with yarn1
@@ -151,6 +157,8 @@ jobs:
           echo "🔎 node-version: ${{ steps.test-setup-node-yarn.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.test-setup-node-yarn.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn.outputs.package-manager-version }}"
+          echo "🔎 global-cache: ${{ steps.test-setup-node-yarn.outputs.global-cache }}"
+          echo "🔎 jobs-cache: ${{ steps.test-setup-node-yarn.outputs.jobs-cache }}"
         shell: bash
   test-cache-node-yarn:
     name: Test Node cache with yarn
