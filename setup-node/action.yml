@@ -175,7 +175,7 @@ runs:
         echo "jobs-cache=$JOBS_CACHE" >> "$GITHUB_OUTPUT"
       shell: bash
       env:
-        GLOBAL-PREFIX: node-cache-
+        GLOBAL-PREFIX: node-cache
         JOBS-PREFIX: setup-node-${{ steps.detect-node-version.outputs.node-version }}-internal
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         RUNNER_NAME: ${{ runner.os }}-${{ runner.arch }}
