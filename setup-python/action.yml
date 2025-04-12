@@ -29,11 +29,10 @@ runs:
       id: python-cache
       with:
         path: ${{ inputs.working-directory }}/${{ inputs.venv-dir }}
-        key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASHED1, env.HASHED2) }}
+        key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASH) }}
       env:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
-        HASHED1: ${{ inputs.working-directory }}/**/*requirements.txt
-        HASHED2: ${{ inputs.working-directory }}/**/requirements-dev.txt
+        HASH: ${{ hashFiles(format('{0}/**/*requirements.txt,{0}/**/requirements-dev.txt', inputs.working-directory)) }}
 
     - name: Install Python
       uses: actions/setup-python@v5
