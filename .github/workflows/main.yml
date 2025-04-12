@@ -106,6 +106,9 @@ jobs:
     name: Test Node cache with pnpm
     runs-on: ubuntu-latest
     needs: test-setup-node-pnpm
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-pnpm.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache-file }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -123,6 +126,27 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-pnpm.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache-file }}"
         shell: bash
+  delete-cache-node-pnpm:
+    name: Delete Node cache with pnpm
+    runs-on: ubuntu-latest
+    needs: test-cache-node-pnpm
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-pnpm.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-pnpm.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
   test-setup-node-yarn1:
     name: Test Setup Node with yarn1
     runs-on: ubuntu-latest
@@ -137,6 +161,9 @@ jobs:
     name: Test Node cache with yarn1
     runs-on: ubuntu-latest
     needs: test-setup-node-yarn1
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-yarn1.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache-file }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -154,6 +181,27 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn1.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache-file }}"
         shell: bash
+  delete-cache-node-yarn1:
+    name: Delete Node cache with yarn1
+    runs-on: ubuntu-latest
+    needs: test-cache-node-yarn1
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-yarn1.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-yarn1.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
   test-setup-node-yarn:
     name: Test Setup Node with yarn
     runs-on: ubuntu-latest
@@ -168,6 +216,9 @@ jobs:
     name: Test Node cache with yarn
     runs-on: ubuntu-latest
     needs: test-setup-node-yarn
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-yarn.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-yarn.outputs.jobs-cache-file }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -185,6 +236,27 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn.outputs.jobs-cache-file }}"
         shell: bash
+  delete-cache-node-yarn:
+    name: Delete Node cache with yarn
+    runs-on: ubuntu-latest
+    needs: test-cache-node-yarn
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-yarn.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-yarn.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
   # delete-setup-node-test-cache:
   #   name: Delete Setup Node tests cache
   #   runs-on: ubuntu-latest
