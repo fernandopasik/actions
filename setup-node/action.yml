@@ -164,9 +164,13 @@ runs:
       id: output-cache-files
       run: |
         echo
-        CACHE_HASH=${{ hashFiles(format('{0}/{1}', inputs.working-directory, steps.detect-node-pm.outputs.node-lock)) }}
-        GLOBAL_CACHE=${{ env.GLOBAL-PREFIX }}-${{ env.PM }}-$CACHE_HASH
-        JOBS_CACHE=${{ env.JOBS-PREFIX }}-${{ env.RUNNER_NAME }}-${{ env.PM }}-$CACHE_HASH
+        OS=${{ runner.os }}
+        ARCH=${{ runner.arch }}
+        PM=${{ steps.detect-node-pm.outputs.node-pm }}
+        NODE_VERSION=${{ steps.detect-node-version.outputs.node-version }}
+
+        GLOBAL_CACHE=node-cache-$OS-$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')-$PM-$CACHE_HASH
+        JOBS_CACHE=setup-node-$NODE_VERSION-internal-$OS-$ARCH-$PM-$CACHE_HASH
 
         echo "💾 Global cache file: $GLOBAL_CACHE"
         echo "💾 Jobs cache file: $JOBS_CACHE"
@@ -175,10 +179,7 @@ runs:
         echo "jobs-cache=$JOBS_CACHE" >> "$GITHUB_OUTPUT"
       shell: bash
       env:
-        GLOBAL-PREFIX: node-cache-${{ runner.os }}-${{ toLower(runner.arch) }}
-        JOBS-PREFIX: setup-node-${{ steps.detect-node-version.outputs.node-version }}-internal
-        PM: ${{ steps.detect-node-pm.outputs.node-pm }}
-        RUNNER_NAME: ${{ runner.os }}-${{ runner.arch }}
+        CACHE_HASH: ${{ hashFiles(format('{0}/{1}', inputs.working-directory, steps.detect-node-pm.outputs.node-lock))}}
 
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
