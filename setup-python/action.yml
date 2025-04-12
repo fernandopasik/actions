@@ -13,6 +13,14 @@ inputs:
     description: Action working directory
     default: .
 
+outputs:
+  python-version:
+    description: Installed Python version
+    value: ${{ steps.display-installed-versions.outputs.node-version }}
+  package-manager-version:
+    description: Installed Python Package Manager version
+    value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
+
 runs:
   using: composite
   steps:
@@ -43,11 +51,16 @@ runs:
       env:
         CACHE-HIT: ${{ steps.python-cache.outputs.cache-hit }}
 
-    - name: Display Python and Pip versions
+    - name: Display installed Python and Pip versions
+      id: display-installed-versions
       run: |
         echo
-        echo "🐍 Python version: $(python -V)"
-        echo "🐍 Pip version: $(pip -V)"
+        PYTHON_VERSION=$(python -V)
+        PM_VERSION=$(pip -V)
+        echo "python-version=$PYTHON_VERSION" >> $GITHUB_OUTPUT
+        echo "package-manager-version=$PM_VERSION" >> $GITHUB_OUTPUT
+        echo "🐍 Python version: $PYTHON_VERSION"
+        echo "🐍 Pip version: $PM_VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
