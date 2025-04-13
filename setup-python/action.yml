@@ -50,14 +50,18 @@ runs:
         echo "💾 Detecting Python cache type"
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE=pipenv
+          CACHE_PATH="${{ inputs.working-directory }}/**/poetry.lock"
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE=poetry
+          CACHE_PATH="${{ inputs.working-directory }}/**/Pipfile.lock"
         else
           CACHE_TYPE=pip
+          CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}7.txt"
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
+        echo "cache-path=$CACHE_PATH" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -69,7 +73,7 @@ runs:
         key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASH) }}
       env:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
-        HASH: ${{ hashFiles(format('{0}/**/*requirements.txt,{0}/**/requirements-dev.txt', inputs.working-directory)) }}
+        HASH: ${{ hashFiles(steps.detect-cache-type.outputs.cache-path) }}
 
     - name: Install Python
       uses: actions/setup-python@v5
@@ -80,12 +84,10 @@ runs:
         cache: ${{ env.CACHE_HIT == 'true' && '' || env.CACHE_TYPE }}
         check-latest: true
         python-version: ${{ steps.detect-python-version.outputs.python-version }}
-        cache-dependency-path: |
-          ${{ inputs.working-directory }}/**/pyproject.toml
-          ${{ inputs.working-directory }}/**/requirements.txt
-          ${{ inputs.working-directory }}/**/requirements-dev.txt
+        cache-dependency-path: ${{ env.CACHE_PATH }}
       env:
         CACHE_HIT: ${{ steps.python-cache.outputs.cache-hit }}
+        CACHE_PATH: ${{ steps.detect-cache-type.outputs.cache-path }}
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
 
     - name: Display installed Python and Pip versions
