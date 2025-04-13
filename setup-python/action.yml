@@ -56,7 +56,7 @@ runs:
           CACHE_PATH="${{ inputs.working-directory }}/**/Pipfile.lock"
         else
           CACHE_TYPE=pip
-          CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}7.txt"
+          CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}.txt"
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
