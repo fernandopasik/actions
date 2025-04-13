@@ -51,35 +51,42 @@ runs:
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE=pipenv
           CACHE_PATH="${{ inputs.working-directory }}/**/poetry.lock"
-          CACHE_HASH="${{ hashFiles(inputs.working-directory/**/poetry.lock) }}"
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE=poetry
           CACHE_PATH="${{ inputs.working-directory }}/**/Pipfile.lock"
-          CACHE_HASH="${{ hashFiles(inputs.working-directory/**/Pipfile.lock) }}"
         else
           CACHE_TYPE=pip
           CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}.txt"
-          CACHE_HASH="${{ hashFiles(inputs.working-directory/**/*requirements{,-dev}.txt) }}"
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
         echo "💾 Detected Python cache path: $CACHE_PATH"
-        echo "💾 Detected Python cache hash: $CACHE_HASH"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
         echo "cache-path=$CACHE_PATH" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: Compute Cache Hash
+      id: compute-cache-hash
+      run: |
+        echo
+        echo "🔑 Computing Python cache hash"
+        echo "🔑 Python cache hash: $CACHE_HASH"
         echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+      env:
+        CACHE_HASH: ${{ hashFiles(steps.detect-cache-type.outputs.cache-path) }}
 
     - name: Load Cached Python dependencies
       uses: actions/cache@v4
       id: python-cache
       with:
         path: ${{ inputs.working-directory }}/${{ inputs.venv-dir }}
-        key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASH) }}
+        key: ${{ env.CACHE-PREFIX }}-${{ env.HASH }}
       env:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
-        HASH: ${{ steps.detect-cache-type.outputs.cache-path }}
+        HASH: ${{ steps.compute-cache-hash.outputs.cache-hash }}
 
     - name: Install Python
       uses: actions/setup-python@v5
