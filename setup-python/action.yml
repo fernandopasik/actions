@@ -59,7 +59,7 @@ runs:
         else
           CACHE_TYPE=pip
           CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}.txt"
-          CACHE_HASH="${{ hashFiles(format('{0}/**/*requirements\{,-dev\}.txt', inputs.working-directory)) }}"
+          CACHE_HASH="${{ hashFiles(format('{0}/**/*requirements{{,-dev}}.txt', inputs.working-directory)) }}"
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
