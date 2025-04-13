@@ -43,16 +43,6 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
-    - name: Load Cached Python dependencies
-      uses: actions/cache@v4
-      id: python-cache
-      with:
-        path: ${{ inputs.working-directory }}/${{ inputs.venv-dir }}
-        key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASH) }}
-      env:
-        CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
-        HASH: ${{ hashFiles(format('{0}/**/*requirements.txt,{0}/**/requirements-dev.txt', inputs.working-directory)) }}
-
     - name: Detect Cache type
       id: detect-cache-type
       run: |
@@ -70,6 +60,16 @@ runs:
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+
+    - name: Load Cached Python dependencies
+      uses: actions/cache@v4
+      id: python-cache
+      with:
+        path: ${{ inputs.working-directory }}/${{ inputs.venv-dir }}
+        key: ${{ env.CACHE-PREFIX }}-${{ hashFiles(env.HASH) }}
+      env:
+        CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
+        HASH: ${{ hashFiles(format('{0}/**/*requirements.txt,{0}/**/requirements-dev.txt', inputs.working-directory)) }}
 
     - name: Install Python
       uses: actions/setup-python@v5
