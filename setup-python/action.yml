@@ -40,6 +40,8 @@ runs:
 
         echo "🐍 Detected Python version: $VERSION"
         echo "python-version=$VERSION" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Load Cached Python dependencies
       uses: actions/cache@v4
