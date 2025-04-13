@@ -60,6 +60,7 @@ runs:
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
+        echo "💾 Detected Python cache path: $CACHE_PATH"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
         echo "cache-path=$CACHE_PATH" >> "$GITHUB_OUTPUT"
       shell: bash
