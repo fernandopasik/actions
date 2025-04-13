@@ -29,13 +29,13 @@ runs:
       run: |
         echo
         echo "📄 Detecting Python version controlled by file"
-        VERSION=$(cat .python-version 2>/dev/null)
-        VERSION=$(echo "$VERSION" | sed 's/^v//')
-        if [ -z "${VERSION}" ]; then
+
+        if [ -f ".python-version" ]; then
+          VERSION=$(cat .python-version)
           echo "📄 Detected .python-version file"
         else
-          echo "📄 No .python-version detected"
           VERSION="${{ inputs.python-version }}"
+          echo "📄 No .python-version detected"
         fi
 
         echo "🐍 Detected Python version: $VERSION"
