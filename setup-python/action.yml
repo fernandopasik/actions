@@ -68,7 +68,9 @@ runs:
         echo "💾 Detected Python cache key files: $CACHE_KEY_FILES"
         echo "💾 Detected Python cache hash: $CACHE_HASH"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
-        echo "cache-key-files=$CACHE_KEY_FILES" >> "$GITHUB_OUTPUT"
+        echo "cache-key-files<<EOF" >> "$GITHUB_OUTPUT"
+        echo "$CACHE_KEY_FILES" >> "$GITHUB_OUTPUT"
+        echo "EOF" >> "$GITHUB_OUTPUT"
         echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
