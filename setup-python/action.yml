@@ -109,7 +109,7 @@ runs:
         cache-dependency-path: ${{ env.CACHE_PATH }}
       env:
         CACHE_HIT: ${{ steps.python-cache.outputs.cache-hit }}
-        CACHE_PATH: ${{ steps.detect-cache-type.outputs.cache-path }}
+        CACHE_PATH: ${{ steps.detect-cache-type.outputs.cache-key-files }}
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
 
     - name: Display installed Python and Pip versions
