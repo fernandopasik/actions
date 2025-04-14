@@ -89,7 +89,7 @@ runs:
         key: ${{ env.CACHE-PREFIX }}-${{ env.HASH }}
       env:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
-        HASH: ${{ steps.compute-cache-hash.outputs.cache-hash }}
+        HASH: ${{ steps.detect-cache-type.outputs.cache-hash }}
 
     - name: Install Python
       uses: actions/setup-python@v5
