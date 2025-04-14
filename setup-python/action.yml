@@ -52,22 +52,24 @@ runs:
 
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
-          CACHE_KEY_GLOB=(**/poetry.lock)
+          CACHE_KEY_FILES=$(printf "%s\n" **/poetry.lock)
+          CACHE_HASH=${{ hashFiles(**/poetry.lock) }}
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE="poetry"
-          CACHE_KEY_GLOB=(**/Pipfile.lock)
+          CACHE_KEY_FILES=$(printf "%s\n" **/Pipfile.lock)
+          CACHE_HASH=${{ hashFiles(**/Pipfile.lock) }}
         else
           CACHE_TYPE="pip"
-          CACHE_KEY_GLOB=(**/*requirements.txt **/requirements-dev.txt)
+          CACHE_KEY_FILES=$(printf "%s\n" **/requirements.txt **/requirements-dev.txt)
+          CACHE_HASH=${{ hashFiles(**/requirements.txt, **/requirements-dev.txt) }}
         fi
-
-        CACHE_KEY_FILES=$(printf ",%s" "${CACHE_KEY_GLOB[@]}")
-        CACHE_KEY_FILES="${CACHE_KEY_FILES:1}"
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
         echo "💾 Detected Python cache key files: $CACHE_KEY_FILES"
+        echo "💾 Detected Python cache hash: $CACHE_HASH"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
         echo "cache-key-files=$CACHE_KEY_FILES" >> "$GITHUB_OUTPUT"
+        echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
