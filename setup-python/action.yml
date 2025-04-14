@@ -48,6 +48,8 @@ runs:
       run: |
         echo
         echo "💾 Detecting Python cache type"
+        shopt -s globstar nullglob
+
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
           CACHE_KEY_GLOB=(**/poetry.lock)
