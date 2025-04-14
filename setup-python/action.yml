@@ -53,15 +53,15 @@ runs:
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
           CACHE_KEY_FILES=$(printf "%s\n" **/poetry.lock)
-          CACHE_HASH=${{ hashFiles(**/poetry.lock) }}
+          CACHE_HASH=${{ hashFiles('**/poetry.lock') }}
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE="poetry"
           CACHE_KEY_FILES=$(printf "%s\n" **/Pipfile.lock)
-          CACHE_HASH=${{ hashFiles(**/Pipfile.lock) }}
+          CACHE_HASH=${{ hashFiles('**/Pipfile.lock') }}
         else
           CACHE_TYPE="pip"
           CACHE_KEY_FILES=$(printf "%s\n" **/requirements.txt **/requirements-dev.txt)
-          CACHE_HASH=${{ hashFiles(**/requirements.txt, **/requirements-dev.txt) }}
+          CACHE_HASH=${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
