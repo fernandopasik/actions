@@ -52,16 +52,22 @@ runs:
 
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
-          CACHE_KEY_FILES=$(printf "%s\n" **/poetry.lock)
-          CACHE_HASH=${{ hashFiles('**/poetry.lock') }}
+          CACHE_KEY_FILES="${{ inputs.working-directory }}/**/poetry.lock"
+          CACHE_HASH=${{ hashFiles(format('{0}/**/poetry.lock', inputs.working-directory)) }}
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE="poetry"
-          CACHE_KEY_FILES=$(printf "%s\n" **/Pipfile.lock)
-          CACHE_HASH=${{ hashFiles('**/Pipfile.lock') }}
+          CACHE_KEY_FILES="${{ inputs.working-directory }}/**/Pipfile.lock"
+          CACHE_HASH=${{ hashFiles(format('{0}/**/Pipfile.lock', inputs.working-directory)) }}
         else
           CACHE_TYPE="pip"
-          CACHE_KEY_FILES=$(printf "%s\n" **/requirements.txt **/requirements-dev.txt)
-          CACHE_HASH=${{ hashFiles('**/requirements.txt', '**/requirements-dev.txt') }}
+          CACHE_KEY_FILES="${{ inputs.working-directory }}/**/*requirements.txt
+          ${{ inputs.working-directory }}/**/requirements-dev.txt"
+          CACHE_HASH=${{
+            hashFiles(
+              format('{0}/**/*requirements.txt', inputs.working-directory),
+              format('{0}/**/requirements-dev.txt', inputs.working-directory)
+            )
+          }}
         fi
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
