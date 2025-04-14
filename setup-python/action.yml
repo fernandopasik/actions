@@ -50,16 +50,16 @@ runs:
         echo "💾 Detecting Python cache type"
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
-          CACHE_KEY_GLOB="**/poetry.lock"
+          CACHE_KEY_GLOB="${{ inputs.working-directory }}/**/poetry.lock"
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
           CACHE_TYPE="poetry"
-          CACHE_KEY_GLOB="**/Pipfile.lock"
+          CACHE_KEY_GLOB="${{ inputs.working-directory }}/**/Pipfile.lock"
         else
           CACHE_TYPE="pip"
-          CACHE_KEY_GLOB="**/*requirements{,-dev}.txt"
+          CACHE_KEY_GLOB="${{ inputs.working-directory }}/**/*requirements{,-dev}.txt"
         fi
 
-        CACHE_KEY_FILES=$(printf '%s\n' ${{ inputs.working-directory }}/$CACHE_KEY_GLOB | paste -sd "," -)
+        CACHE_KEY_FILES=$(find -type f -path "$CACHE_KEY_GLOB" 2>/dev/null | paste -sd "," -)
 
         echo "💾 Detected Python cache type: $CACHE_TYPE"
         echo "💾 Detected Python cache key files: $CACHE_KEY_FILES"
