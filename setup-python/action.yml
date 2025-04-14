@@ -49,25 +49,22 @@ runs:
         echo
         echo "💾 Detecting Python cache type"
         if [ -f Pipfile.lock ]; then
-          CACHE_TYPE=pipenv
-          CACHE_PATH="${{ inputs.working-directory }}/**/poetry.lock"
-          CACHE_HASH="${{ hashFiles(format('{0}/**/poetry.lock', inputs.working-directory)) }}"
+          CACHE_TYPE="pipenv"
+          CACHE_KEY_GLOB="**/poetry.lock"
         elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
-          CACHE_TYPE=poetry
-          CACHE_PATH="${{ inputs.working-directory }}/**/Pipfile.lock"
-          CACHE_HASH="${{ hashFiles(format('{0}/**/Pipfile.lock', inputs.working-directory)) }}"
+          CACHE_TYPE="poetry"
+          CACHE_KEY_GLOB="**/Pipfile.lock"
         else
-          CACHE_TYPE=pip
-          CACHE_PATH="${{ inputs.working-directory }}/**/*requirements{,-dev}.txt"
-          CACHE_HASH="${{ hashFiles(format('{0}/**/*requirements{{,-dev}}.txt', inputs.working-directory)) }}"
+          CACHE_TYPE="pip"
+          CACHE_KEY_GLOB="**/*requirements{,-dev}.txt"
         fi
 
+        CACHE_KEY_FILES=$(printf '%s\n' ${{ inputs.working-directory }}/$CACHE_KEY_GLOB | paste -sd "," -)
+
         echo "💾 Detected Python cache type: $CACHE_TYPE"
-        echo "💾 Detected Python cache path: $CACHE_PATH"
-        echo "💾 Detected Python cache hash: $CACHE_HASH"
+        echo "💾 Detected Python cache key files: $CACHE_KEY_FILES"
         echo "cache-type=$CACHE_TYPE" >> "$GITHUB_OUTPUT"
-        echo "cache-path=$CACHE_PATH" >> "$GITHUB_OUTPUT"
-        echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
+        echo "cache-key-files=$CACHE_KEY_FILES" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -81,7 +78,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       env:
-        CACHE_HASH: ${{ hashFiles(steps.detect-cache-type.outputs.cache-path) }}
+        CACHE_HASH: ${{ hashFiles(steps.detect-cache-type.outputs.cache-key-files) }}
 
     - name: Load Cached Python dependencies
       uses: actions/cache@v4
