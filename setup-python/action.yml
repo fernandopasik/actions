@@ -12,12 +12,6 @@ inputs:
   working-directory:
     description: Action working directory
     default: .
-  global-cache-file:
-    description: Python Package Manager global cache
-    value: ${{ steps.output-cache-files.outputs.global-cache }}
-  jobs-cache-file:
-    description: Python Package Manager jobs cache
-    value: ${{ steps.output-cache-files.outputs.jobs-cache }}
 
 outputs:
   python-version:
@@ -26,6 +20,12 @@ outputs:
   package-manager-version:
     description: Installed Python Package Manager version
     value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
+  global-cache-file:
+    description: Python Package Manager global cache
+    value: ${{ steps.output-cache-files.outputs.global-cache }}
+  jobs-cache-file:
+    description: Python Package Manager jobs cache
+    value: ${{ steps.output-cache-files.outputs.jobs-cache }}
 
 runs:
   using: composite
