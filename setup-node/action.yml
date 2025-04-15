@@ -166,11 +166,12 @@ runs:
         echo
         OS=${{ runner.os }}
         ARCH=${{ runner.arch }}
+        ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
         PM=${{ steps.detect-node-pm.outputs.node-pm }}
         PM_CACHE=${{ steps.detect-node-pm.outputs.node-cache }}
         NODE_VERSION=${{ steps.detect-node-version.outputs.node-version }}
 
-        GLOBAL_CACHE=node-cache-$OS-$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')-$PM_CACHE-$CACHE_HASH
+        GLOBAL_CACHE=node-cache-$OS-$ARCH_LOWER-$PM_CACHE-$CACHE_HASH
         JOBS_CACHE=setup-node-$NODE_VERSION-internal-$OS-$ARCH-$PM-$CACHE_HASH
 
         echo "💾 Global cache file: $GLOBAL_CACHE"
