@@ -315,6 +315,15 @@ jobs:
         uses: ./setup-python
         with:
           working-directory: ./test/setup-python
+      - name: Display Setup Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
   test-setup-ansible:
     name: Test Setup Ansible
     runs-on: ubuntu-latest
@@ -344,3 +353,12 @@ jobs:
         uses: ./setup-ansible
         with:
           working-directory: ./test/setup-ansible
+      - name: Display Setup Ansible and Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-ansible.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-ansible.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-ansible.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-ansible.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-ansible.outputs.jobs-cache-file }}"
+        shell: bash
