@@ -16,7 +16,7 @@ inputs:
 outputs:
   python-version:
     description: Installed Python version
-    value: ${{ steps.display-installed-versions.outputs.node-version }}
+    value: ${{ steps.display-installed-versions.outputs.python-version }}
   package-manager-version:
     description: Installed Python Package Manager version
     value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
