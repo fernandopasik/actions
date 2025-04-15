@@ -313,6 +313,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Python
         uses: ./setup-python
+        id: test-setup-python
         with:
           working-directory: ./test/setup-python
       - name: Display Setup Python outputs
@@ -347,6 +348,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Python
         uses: ./setup-python
+        id: test-setup-python
         with:
           working-directory: ./test/setup-ansible
       - name: Setup Ansible
@@ -356,9 +358,9 @@ jobs:
       - name: Display Setup Ansible and Python outputs
         run: |
           echo
-          echo "🔎 python-version: ${{ steps.test-setup-ansible.outputs.python-version }}"
-          echo "🔎 package-manager: ${{ steps.test-setup-ansible.outputs.package-manager }}"
-          echo "🔎 package-manager-version: ${{ steps.test-setup-ansible.outputs.package-manager-version }}"
-          echo "🔎 global-cache-file: ${{ steps.test-setup-ansible.outputs.global-cache-file }}"
-          echo "🔎 jobs-cache-file: ${{ steps.test-setup-ansible.outputs.jobs-cache-file }}"
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
         shell: bash
