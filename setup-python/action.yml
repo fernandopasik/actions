@@ -116,7 +116,7 @@ runs:
       id: display-installed-versions
       run: |
         echo
-        PYTHON_VERSION=$(python -V)
+        PYTHON_VERSION=$(python -V | sed 's/^Python //')
         PM_VERSION=$(pip -V)
         echo "python-version=$PYTHON_VERSION" >> $GITHUB_OUTPUT
         echo "package-manager-version=$PM_VERSION" >> $GITHUB_OUTPUT
