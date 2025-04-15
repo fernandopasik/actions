@@ -3,6 +3,8 @@ name: PR
 # yamllint disable-line rule:truthy
 on: pull_request
 
+permissions: read-all
+
 jobs:
   auto-review:
     name: Auto review
