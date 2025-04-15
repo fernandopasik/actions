@@ -130,14 +130,15 @@ runs:
       run: |
         echo
         OS="${{ runner.os }}"
-        ARCH="$(echo "${{ runner.arch }}" | tr '[:lower:]' '[:upper:]')"
+        ARCH="${{ runner.arch }}"
+        ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
         . /etc/os-release
         OS_TAG="$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
-        GLOBAL_CACHE=setup-python-$OS-$ARCH-$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
+        GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER-$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
         JOBS_CACHE=setup-python-internal-$OS-$ARCH-venv-$CACHE_HASH
 
         echo "💾 Global cache file: $GLOBAL_CACHE"
