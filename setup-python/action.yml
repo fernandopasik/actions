@@ -132,7 +132,7 @@ runs:
         OS="${{ runner.os }}"
         ARCH="$(echo "${{ runner.arch }}" | tr '[:lower:]' '[:upper:]')"
         . /etc/os-release
-        OS_TAG="-$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')-"
+        OS_TAG="$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
