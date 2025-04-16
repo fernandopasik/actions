@@ -172,7 +172,10 @@ runs:
         echo
         echo "::group::🐍 Installing dependencies"
         case "$CACHE_TYPE" in
-          pipenv) pipenv install --dev ;;
+          pipenv)
+            pip install pipenv
+            pipenv install --dev
+          ;;
           *) pip install $( [ -f requirements.txt ] && echo -r requirements.txt ) \
             $( [ -f requirements-dev.txt ] && echo -r requirements-dev.txt )
           ;;
