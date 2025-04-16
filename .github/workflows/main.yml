@@ -259,7 +259,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-  test-setup-python:
+  test-setup-python-pip:
     name: Test Setup Python
     runs-on: ubuntu-latest
     steps:
@@ -268,11 +268,11 @@ jobs:
       - name: Setup Python
         uses: ./setup-python
         with:
-          working-directory: ./test/setup-python
-  test-cache-python:
+          working-directory: ./test/setup-python/pip
+  test-cache-python-pip:
     name: Test Python cache
     runs-on: ubuntu-latest
-    needs: test-setup-python
+    needs: test-setup-python-pip
     outputs:
       global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
       jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
@@ -283,7 +283,7 @@ jobs:
         uses: ./setup-python
         id: test-setup-python
         with:
-          working-directory: ./test/setup-python
+          working-directory: ./test/setup-python/pip
       - name: Display Setup Python outputs
         run: |
           echo
@@ -293,10 +293,10 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
         shell: bash
-  delete-cache-python:
+  delete-cache-python-pip:
     name: Delete Python cache
     runs-on: ubuntu-latest
-    needs: test-cache-python
+    needs: test-cache-python-pip
     permissions:
       actions: write
     steps:
@@ -305,8 +305,63 @@ jobs:
       - name: Delete github cache
         run: |
           echo
-          GLOBAL_CACHE=${{ needs.test-cache-python.outputs.global-cache-file }}
-          JOBS_CACHE=${{ needs.test-cache-python.outputs.jobs-cache-file }}
+          GLOBAL_CACHE=${{ needs.test-cache-python-pip.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-python-pip.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-python-pipenv:
+    name: Test Setup Python
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ./test/setup-python/pipenv
+  test-cache-python-pipenv:
+    name: Test Python cache
+    runs-on: ubuntu-latest
+    needs: test-setup-python-pipenv
+    outputs:
+      global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: test-setup-python
+        with:
+          working-directory: ./test/setup-python/pipenv
+      - name: Display Setup Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-python-pipenv:
+    name: Delete Python cache
+    runs-on: ubuntu-latest
+    needs: test-cache-python-pipenv
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-python-pipenv.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-python-pipenv.outputs.jobs-cache-file }}
           echo "❌ Deleting cache key: $JOBS_CACHE"
           gh cache delete "$JOBS_CACHE"
           echo "❌ Deleting cache key: $GLOBAL_CACHE"
