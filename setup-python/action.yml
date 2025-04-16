@@ -130,9 +130,9 @@ runs:
         OS="${{ runner.os }}"
         ARCH="${{ runner.arch }}"
         ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
-        . /etc/os-release
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
-        OS_TAG=$([ "$PM_CACHE" != "pipenv" ] && echo "$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')-")
+        . /etc/os-release
+        OS_TAG=$(if [ "$PM_CACHE" != "pipenv" ]; then echo "$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')-"; fi)
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
