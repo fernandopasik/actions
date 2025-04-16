@@ -30,22 +30,17 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Detect Python version
-      id: detect-python-version
+    - name: Detect version to install
+      id: detect-version-to-install
       run: |
         echo
-        echo "📄 Detecting Python version controlled by file"
+        echo "🏷️ Detecting Python version to install"
 
-        if [ -f ".python-version" ]; then
-          VERSION=$(cat .python-version)
-          echo "📄 Detected .python-version file"
-        else
-          VERSION="${{ inputs.python-version }}"
-          echo "📄 No .python-version detected"
-        fi
+        VERSION=$( [ -f .python-version ] && cat .python-version || echo "${{ inputs.python-version }}" )
+        [ -f .python-version ] && echo "📄 Detected .python-version file"
 
         echo "🐍 Detected Python version: $VERSION"
-        echo "python-version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -105,7 +100,7 @@ runs:
         # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md
         cache: ${{ env.CACHE_HIT == 'true' && '' || env.CACHE_TYPE }}
         check-latest: true
-        python-version: ${{ steps.detect-python-version.outputs.python-version }}
+        python-version: ${{ steps.detect-version-to-install.outputs.python-version }}
         cache-dependency-path: ${{ env.CACHE_PATH }}
       env:
         CACHE_HIT: ${{ steps.python-cache.outputs.cache-hit }}
@@ -135,7 +130,7 @@ runs:
         . /etc/os-release
         OS_TAG="$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
-        PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
+        PYTHON_VERSION="${{ steps.display-installed-versions.outputs.version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
         GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER-$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
