@@ -58,12 +58,12 @@ runs:
 
         if [ -f Pipfile.lock ]; then
           CACHE_TYPE="pipenv"
-          CACHE_KEY_FILES="${{ inputs.working-directory }}/**/poetry.lock"
-          CACHE_HASH=${{ hashFiles(format('{0}/**/poetry.lock', inputs.working-directory)) }}
-        elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
-          CACHE_TYPE="poetry"
           CACHE_KEY_FILES="${{ inputs.working-directory }}/**/Pipfile.lock"
           CACHE_HASH=${{ hashFiles(format('{0}/**/Pipfile.lock', inputs.working-directory)) }}
+        elif [ -f poetry.lock ] || grep -q '\[tool.poetry\]' pyproject.toml 2>/dev/null; then
+          CACHE_TYPE="poetry"
+          CACHE_KEY_FILES="${{ inputs.working-directory }}/**/poetry.lock"
+          CACHE_HASH=${{ hashFiles(format('{0}/**/poetry.lock', inputs.working-directory)) }}
         else
           CACHE_TYPE="pip"
           CACHE_KEY_FILES="${{ inputs.working-directory }}/**/*requirements.txt
