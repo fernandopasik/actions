@@ -169,15 +169,16 @@ runs:
         echo "🐍 Activating Python Virtual Env"
         . ${{ inputs.venv-dir }}/bin/activate
 
-        if [ -f "requirements.txt" ]; then
-          echo "::group::🐍 Installing dependencies"
-          pip install -r requirements.txt
-          echo "::endgroup::"
-        fi
-        if [ -f "requirements-dev.txt" ]; then
-          echo "::group::🐍 Installing dev dependencies"
-          pip install -r requirements-dev.txt
-          echo "::endgroup::"
-        fi
+        echo
+        echo "::group::🐍 Installing dependencies"
+        case "$CACHE_TYPE" in
+          pipenv) pipenv install --dev ;;
+          *) pip install $( [ -f requirements.txt ] && "echo -r requirements.txt" ) \
+            $( [ -f requirements-dev.txt ] && "echo -r requirements-dev.txt" )
+          ;;
+        esac
+        echo "::endgroup::"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+      env:
+        CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
