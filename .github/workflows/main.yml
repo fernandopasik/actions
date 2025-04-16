@@ -260,7 +260,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
   test-setup-python-pip:
-    name: Test Setup Python
+    name: Test Setup Python with pip
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -270,7 +270,7 @@ jobs:
         with:
           working-directory: ./test/setup-python/pip
   test-cache-python-pip:
-    name: Test Python cache
+    name: Test Python cache with pip
     runs-on: ubuntu-latest
     needs: test-setup-python-pip
     outputs:
@@ -294,7 +294,7 @@ jobs:
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
         shell: bash
   delete-cache-python-pip:
-    name: Delete Python cache
+    name: Delete Python cache with pip
     runs-on: ubuntu-latest
     needs: test-cache-python-pip
     permissions:
@@ -315,7 +315,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
   test-setup-python-pipenv:
-    name: Test Setup Python
+    name: Test Setup Python with pipenv
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -325,7 +325,7 @@ jobs:
         with:
           working-directory: ./test/setup-python/pipenv
   test-cache-python-pipenv:
-    name: Test Python cache
+    name: Test Python cache with pipenv
     runs-on: ubuntu-latest
     needs: test-setup-python-pipenv
     outputs:
@@ -349,7 +349,7 @@ jobs:
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
         shell: bash
   delete-cache-python-pipenv:
-    name: Delete Python cache
+    name: Delete Python cache with pipenv
     runs-on: ubuntu-latest
     needs: test-cache-python-pipenv
     permissions:
