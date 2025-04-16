@@ -174,7 +174,7 @@ runs:
         case "$CACHE_TYPE" in
           pipenv)
             pip install pipenv
-            pipenv install --dev
+            PIPENV_VENV_IN_PROJECT=1 pipenv install --dev
           ;;
           *) pip install $( [ -f requirements.txt ] && echo -r requirements.txt ) \
             $( [ -f requirements-dev.txt ] && echo -r requirements-dev.txt )
