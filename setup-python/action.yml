@@ -167,8 +167,10 @@ runs:
       if: steps.python-cache.outputs.cache-hit != 'true'
       run: |
         echo
-        echo "🐍 Activating Python Virtual Env"
-        . ${{ inputs.venv-dir }}/bin/activate
+        if [ "$CACHE_TYPE" != "pipenv" ]; then
+          echo "🐍 Activating Python Virtual Env"
+          . ${{ inputs.venv-dir }}/bin/activate
+        fi
 
         echo
         echo "::group::🐍 Installing dependencies"
