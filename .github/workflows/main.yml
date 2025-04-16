@@ -259,41 +259,6 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-  # delete-setup-node-test-cache:
-  #   name: Delete Setup Node tests cache
-  #   runs-on: ubuntu-latest
-  #   needs:
-  #     - test-cache-node-npm
-  #     - test-cache-node-pnpm
-  #     - test-cache-node-yarn1
-  #     - test-cache-node-yarn
-  #   permissions:
-  #     actions: write
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - name: Github API cache delete
-  #       run: |
-  #         echo
-  #         SETUP_NODE_KEYS=$(gh cache list --key setup-node --json key \
-  #           --template '{{range .}}{{.key}}{{"\n"}}{{end}}')
-  #         NODE_CACHE_KEYS=$(gh cache list --key node-cache --json key \
-  #           --template '{{range .}}{{.key}}{{"\n"}}{{end}}')
-  #         CACHE_KEYS="$SETUP_NODE_KEYS"$'\n'"$NODE_CACHE_KEYS"
-
-  #         echo "::group::💾 Cache keys to delete"
-  #         echo "$CACHE_KEYS"
-  #         echo "::endgroup::"
-
-  #         echo "::group::❌ Deleting cache keys"
-  #         echo "$CACHE_KEYS" | while IFS= read -r KEY; do
-  #           echo "❌ Deleting cache key: $KEY"
-  #           gh cache delete "$KEY"
-  #         done
-  #         echo "::endgroup::"
-  #       shell: bash
-  #   env:
-  #     GH_TOKEN: ${{ github.token }}
   test-setup-python:
     name: Test Setup Python
     runs-on: ubuntu-latest
