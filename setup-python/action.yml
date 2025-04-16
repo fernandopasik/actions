@@ -5,7 +5,7 @@ description: Setups latest Python and installs dependencies
 inputs:
   python-version:
     description: Python version to install
-    default: '3.13'
+    default: '3'
   venv-dir:
     description: Directory for Python Virtual Env
     default: .venv
@@ -102,12 +102,13 @@ runs:
         # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md
         cache: ${{ env.CACHE_HIT == 'true' && '' || env.CACHE_TYPE }}
         check-latest: true
-        python-version: ${{ steps.detect-version-to-install.outputs.python-version }}
+        python-version: ${{ env.VERSION }}
         cache-dependency-path: ${{ env.CACHE_PATH }}
       env:
         CACHE_HIT: ${{ steps.python-cache.outputs.cache-hit }}
         CACHE_PATH: ${{ steps.detect-cache-type.outputs.cache-key-files }}
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
+        VERSION: ${{steps.detect-version-to-install.outputs.version }}
 
     - name: Display installed Python and Pip versions
       id: display-installed-versions
