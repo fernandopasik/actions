@@ -36,13 +36,15 @@ runs:
         echo
         echo "🏷️ Detecting Python version to install"
 
-        VERSION=$( [ -f .python-version ] && cat .python-version || echo "${{ inputs.python-version }}" )
+        VERSION=$(cat .python-version 2>/dev/null || echo "$INPUT_VERSION")
         [ -f .python-version ] && echo "📄 Detected .python-version file"
 
         echo "🐍 Detected Python version: $VERSION"
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+      env:
+        INPUT_VERSION: ${{ inputs.python-version }}
 
     - name: Detect Cache type
       id: detect-cache-type
