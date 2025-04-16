@@ -5,7 +5,7 @@ description: Setups latest Python and installs dependencies
 inputs:
   python-version:
     description: Python version to install
-    default: '3'
+    default: '3.13'
   venv-dir:
     description: Directory for Python Virtual Env
     default: .venv
@@ -37,7 +37,7 @@ runs:
         echo "🏷️ Detecting Python version to install"
 
         VERSION=$(cat .python-version 2>/dev/null || echo "$INPUT_VERSION")
-        [ -f .python-version ] && echo "📄 Detected .python-version file"
+        [ -f .python-version ] && echo "📄 Detected .python-version file with version: $VERSION"
 
         echo "🐍 Detected Python version: $VERSION"
         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
