@@ -149,6 +149,7 @@ runs:
       shell: bash
 
     - name: Create Python Virtual Env
+      if: steps.detect-cache-type.outputs.cache-type != 'pipenv'
       run: |
         echo
         if [ ! -d "${{ inputs.venv-dir }}" ]; then
