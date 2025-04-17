@@ -134,12 +134,12 @@ runs:
         OS_TAG=""
         if [ "$PM_CACHE" != "pipenv" ]; then
           . /etc/os-release
-          OS_TAG="$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')-"
+          OS_TAG="-$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         fi
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
-        GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER-$OS_TAGpython-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
+        GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
         JOBS_CACHE=setup-python-internal-$OS-$ARCH-venv-$CACHE_HASH
 
         echo "💾 Global cache file: $GLOBAL_CACHE"
