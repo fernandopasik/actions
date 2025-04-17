@@ -1,0 +1,404 @@
+---
+name: tests
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+permissions: read-all
+
+jobs:
+  test-setup-node-npm:
+    name: Test Setup Node with npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/npm
+  test-cache-node-npm:
+    name: Test Node cache with npm
+    runs-on: ubuntu-latest
+    needs: test-setup-node-npm
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-npm.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-npm.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        id: test-setup-node-npm
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/npm
+      - name: Display Setup Node outputs
+        run: |
+          echo
+          echo "🔎 node-version: ${{ steps.test-setup-node-npm.outputs.node-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-node-npm.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-npm.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-node-npm.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-npm.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-node-npm:
+    name: Delete Node cache with npm
+    runs-on: ubuntu-latest
+    needs: test-cache-node-npm
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-npm.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-npm.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-node-pnpm:
+    name: Test Setup Node with pnpm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/pnpm
+  test-cache-node-pnpm:
+    name: Test Node cache with pnpm
+    runs-on: ubuntu-latest
+    needs: test-setup-node-pnpm
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-pnpm.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        id: test-setup-node-pnpm
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/pnpm
+      - name: Display Setup Node outputs
+        run: |
+          echo
+          echo "🔎 node-version: ${{ steps.test-setup-node-pnpm.outputs.node-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-node-pnpm.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-pnpm.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-node-pnpm.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-pnpm.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-node-pnpm:
+    name: Delete Node cache with pnpm
+    runs-on: ubuntu-latest
+    needs: test-cache-node-pnpm
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-pnpm.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-pnpm.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-node-yarn1:
+    name: Test Setup Node with yarn1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn1
+  test-cache-node-yarn1:
+    name: Test Node cache with yarn1
+    runs-on: ubuntu-latest
+    needs: test-setup-node-yarn1
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-yarn1.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        id: test-setup-node-yarn1
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn1
+      - name: Display Setup Node outputs
+        run: |
+          echo
+          echo "🔎 node-version: ${{ steps.test-setup-node-yarn1.outputs.node-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-node-yarn1.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn1.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn1.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn1.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-node-yarn1:
+    name: Delete Node cache with yarn1
+    runs-on: ubuntu-latest
+    needs: test-cache-node-yarn1
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-yarn1.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-yarn1.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-node-yarn:
+    name: Test Setup Node with yarn
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn
+  test-cache-node-yarn:
+    name: Test Node cache with yarn
+    runs-on: ubuntu-latest
+    needs: test-setup-node-yarn
+    outputs:
+      global-cache-file: ${{ steps.test-setup-node-yarn.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-node-yarn.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        id: test-setup-node-yarn
+        uses: ./setup-node
+        with:
+          working-directory: ./test/setup-node/yarn
+      - name: Display Setup Node outputs
+        run: |
+          echo
+          echo "🔎 node-version: ${{ steps.test-setup-node-yarn.outputs.node-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-node-yarn.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-node-yarn.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-node-yarn.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-node-yarn.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-node-yarn:
+    name: Delete Node cache with yarn
+    runs-on: ubuntu-latest
+    needs: test-cache-node-yarn
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-node-yarn.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-node-yarn.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-python-pip:
+    name: Test Setup Python with pip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ./test/setup-python/pip
+  test-cache-python-pip:
+    name: Test Python cache with pip
+    runs-on: ubuntu-latest
+    needs: test-setup-python-pip
+    outputs:
+      global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: test-setup-python
+        with:
+          working-directory: ./test/setup-python/pip
+      - name: Display Setup Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-python-pip:
+    name: Delete Python cache with pip
+    runs-on: ubuntu-latest
+    needs: test-cache-python-pip
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-python-pip.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-python-pip.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-python-pipenv:
+    name: Test Setup Python with pipenv
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ./test/setup-python/pipenv
+  test-cache-python-pipenv:
+    name: Test Python cache with pipenv
+    runs-on: ubuntu-latest
+    needs: test-setup-python-pipenv
+    outputs:
+      global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: test-setup-python
+        with:
+          working-directory: ./test/setup-python/pipenv
+      - name: Display Setup Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-python-pipenv:
+    name: Delete Python cache with pipenv
+    runs-on: ubuntu-latest
+    needs: test-cache-python-pipenv
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-python-pipenv.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-python-pipenv.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+  test-setup-ansible:
+    name: Test Setup Ansible
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ./test/setup-ansible
+      - name: Setup Ansible
+        uses: ./setup-ansible
+        with:
+          working-directory: ./test/setup-ansible
+  test-cache-ansible:
+    name: Test Ansible cache
+    runs-on: ubuntu-latest
+    needs: test-setup-ansible
+    outputs:
+      python-global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
+      python-jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: test-setup-python
+        with:
+          working-directory: ./test/setup-ansible
+      - name: Setup Ansible
+        uses: ./setup-ansible
+        with:
+          working-directory: ./test/setup-ansible
+      - name: Display Setup Ansible and Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-ansible:
+    name: Delete Ansible and Python cache
+    runs-on: ubuntu-latest
+    needs: test-cache-ansible
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          PYTHON_GLOBAL_CACHE=${{ needs.test-cache-ansible.outputs.python-global-cache-file }}
+          PYTHON_JOBS_CACHE=${{ needs.test-cache-ansible.outputs.python-jobs-cache-file }}
+          echo "❌ Deleting cache key: $PYTHON_JOBS_CACHE"
+          gh cache delete "$PYTHON_JOBS_CACHE"
+          echo "❌ Deleting cache key: $PYTHON_GLOBAL_CACHE"
+          gh cache delete "$PYTHON_GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
