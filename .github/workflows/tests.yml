@@ -360,6 +360,7 @@ jobs:
     outputs:
       python-global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
       python-jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+      ansible-jobs-cache-key: ${{ steps.test-setup-ansible.outputs.jobs-cache-key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -401,10 +402,13 @@ jobs:
           echo
           PYTHON_GLOBAL_CACHE=${{ needs.test-cache-ansible.outputs.python-global-cache-file }}
           PYTHON_JOBS_CACHE=${{ needs.test-cache-ansible.outputs.python-jobs-cache-file }}
+          ANSIBLE_JOBS_CACHE=${{ needs.test-cache-ansible.outputs.ansible-jobs-cache-key }}
           echo "❌ Deleting cache key: $PYTHON_JOBS_CACHE"
           gh cache delete "$PYTHON_JOBS_CACHE"
           echo "❌ Deleting cache key: $PYTHON_GLOBAL_CACHE"
           gh cache delete "$PYTHON_GLOBAL_CACHE"
+          echo "❌ Deleting cache key: $ANSIBLE_JOBS_CACHE"
+          gh cache delete "$ANSIBLE_JOBS_CACHE"
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
