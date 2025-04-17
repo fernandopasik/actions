@@ -97,11 +97,12 @@ runs:
     - name: Install Package Manager
       run: |
         echo
-        echo "📦 Installing package manager"
+        echo "::group::📦 Installing package manager"
         case "$CACHE_TYPE" in
           pipenv)pip install pipenv;;
           poetry)pip install poetry;;
         esac
+        echo "::endgroup::"
       shell: bash
       env:
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
