@@ -24,14 +24,14 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Calculate cache hash
-      id: calculate-cache-hash
+    - name: Calculate cache key
+      id: calculate-cache-key
       run: |
         echo
-        echo "🔑 Calculating cache hash"
-        CACHE_HASH=${{ hashFiles(format('{0}/**/requirements.yml', inputs.working-directory)) }}
-        echo "🔑 Calculated cache hash: $CACHE_HASH"
-        echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
+        echo "🔑 Calculating cache key"
+        CACHE_KEY="ansible-galaxy-jobs-${{ hashFiles(format('{0}/**/requirements.yml', inputs.working-directory)) }}"
+        echo "🔑 Calculated cache key: $CACHE_KEY"
+        echo "cache-key=$CACHE_KEY" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -40,7 +40,7 @@ runs:
       id: ansible-galaxy-cache
       with:
         path: ${{ inputs.working-directory }}/${{ inputs.cache-path }}
-        key: ansible-galaxy-${{ steps.calculate-cache-hash.outputs.cache-hash }}
+        key: ${{ steps.calculate-cache-key.outputs.cache-key }}
 
     - name: Install Ansible Galaxy dependencies
       if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
