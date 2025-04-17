@@ -30,8 +30,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Detect Node.js version
-      id: detect-node-version
+    - name: Detect version to install
+      id: detect-version-to-install
       run: |
         echo
         echo "📦 Detecting Node.js version"
@@ -39,7 +39,7 @@ runs:
         VERSION=$(echo "$VERSION" | sed 's/^v//')
         echo "📦 Detected Node.js version: $VERSION"
 
-        echo "node-version=$VERSION" >> "$GITHUB_OUTPUT"
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
@@ -95,7 +95,7 @@ runs:
         key: ${{ env.CACHE-PREFIX }}-${{ env.RUNNER_NAME }}-${{ env.PM }}-${{ hashFiles(env.HASHED) }}
       env:
         CACHE-PATH: ${{ steps.detect-node-pm.outputs.cache-path }}
-        CACHE-PREFIX: setup-node-${{ steps.detect-node-version.outputs.node-version }}-internal
+        CACHE-PREFIX: setup-node-${{ steps.detect-version-to-install.outputs.version }}-internal
         HASHED: ${{ inputs.working-directory }}/${{ steps.detect-node-pm.outputs.node-lock }}
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
         RUNNER_NAME: ${{ runner.os }}-${{ runner.arch }}
@@ -105,7 +105,7 @@ runs:
       uses: actions/setup-node@v4
       with:
         check-latest: true
-        node-version: ${{ steps.detect-node-version.outputs.node-version }}
+        node-version: ${{ steps.detect-version-to-install.outputs.version }}
 
     - name: Enable Corepack
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
@@ -133,7 +133,7 @@ runs:
         cache: ${{ (env.CACHE-HIT != 'true' && env.CACHE) || '' }}
         cache-dependency-path: ${{ inputs.working-directory }}/${{ env.LOCK }}
         check-latest: true
-        node-version: ${{ steps.detect-node-version.outputs.node-version }}
+        node-version: ${{ steps.detect-version-to-install.outputs.version }}
       env:
         LOCK: ${{ steps.detect-node-pm.outputs.node-lock }}
         CACHE: ${{ steps.detect-node-pm.outputs.node-cache }}
@@ -169,7 +169,7 @@ runs:
         ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
         PM=${{ steps.detect-node-pm.outputs.node-pm }}
         PM_CACHE=${{ steps.detect-node-pm.outputs.node-cache }}
-        NODE_VERSION=${{ steps.detect-node-version.outputs.node-version }}
+        NODE_VERSION=${{ steps.detect-version-to-install.outputs.version }}
 
         GLOBAL_CACHE=node-cache-$OS-$ARCH_LOWER-$PM_CACHE-$CACHE_HASH
         JOBS_CACHE=setup-node-$NODE_VERSION-internal-$OS-$ARCH-$PM-$CACHE_HASH
