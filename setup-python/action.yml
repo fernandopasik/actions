@@ -94,6 +94,18 @@ runs:
         CACHE-PREFIX: setup-python-internal-${{ runner.os }}-${{ runner.arch }}-venv
         HASH: ${{ steps.detect-cache-type.outputs.cache-hash }}
 
+    - name: Install Package Manager
+      run: |
+        echo
+        echo "📦 Installing package manager"
+        case "$CACHE_TYPE" in
+          pipenv)pip install pipenv;;
+          poetry)pip install poetry;;
+        esac
+      shell: bash
+      env:
+        CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
+
     - name: Install Python
       uses: actions/setup-python@v5
       with:
@@ -178,11 +190,9 @@ runs:
         case "$CACHE_TYPE" in
           pipenv)
             mkdir -p "$HOME/.local/share/virtualenvs"
-            pip install pipenv
             PIPENV_VENV_IN_PROJECT=1 pipenv install --dev
           ;;
           poetry)
-            pip install poetry
             poetry config virtualenvs.in-project true --local
             poetry install
           ;;
