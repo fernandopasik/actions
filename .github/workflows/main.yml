@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Python
-        uses: fernandopasik/actions/setup-python@main
+        uses: ./setup-python
       - name: Check Format
         run: make format
   lint:
