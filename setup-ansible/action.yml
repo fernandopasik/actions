@@ -20,6 +20,9 @@ outputs:
   ansible-galaxy-version:
     description: Installed Ansible Galaxy version
     value: ${{ steps.display-installed-versions.outputs.ansible-galaxy-version }}
+  jobs-cache-key:
+    description: Ansible jobs cache
+    value: ${{ steps.calculate-cache-key.outputs.cache-key }}
 
 runs:
   using: composite
