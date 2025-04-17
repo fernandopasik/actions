@@ -143,6 +143,10 @@ runs:
         ARCH="${{ runner.arch }}"
         ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
+        PM_VERSION=""
+        if [ "$PM_CACHE" == "poetry" ]; then
+          PM_VERSION="-v$(poetry --version | sed -n 's/.*version \([0-9]\+\)\..*/\1/p')"
+        fi
         OS_TAG=""
         if [ "$PM_CACHE" == "pip" ]; then
           . /etc/os-release
@@ -151,7 +155,7 @@ runs:
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
-        GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE-$CACHE_HASH
+        GLOBAL_CACHE=setup-python-$OS-$ARCH_LOWER$OS_TAG-python-$PYTHON_VERSION-$PM_CACHE$PM_VERSION-$CACHE_HASH
         JOBS_CACHE=setup-python-internal-$OS-$ARCH-venv-$CACHE_HASH
 
         echo "💾 Global cache file: $GLOBAL_CACHE"
