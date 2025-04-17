@@ -10,6 +10,17 @@ inputs:
     description: Action working directory
     default: .
 
+outputs:
+  ansible-version:
+    description: Installed Ansible version
+    value: ${{ steps.display-installed-versions.outputs.ansible-version }}
+  ansible-lint-version:
+    description: Installed Ansible Lint version
+    value: ${{ steps.display-installed-versions.outputs.ansible-lint-version }}
+  ansible-galaxy-version:
+    description: Installed Ansible Galaxy version
+    value: ${{ steps.display-installed-versions.outputs.ansible-galaxy-version }}
+
 runs:
   using: composite
   steps:
@@ -42,11 +53,16 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Display Ansible and tools versions
+      id: display-installed-versions
       run: |
         echo
         ANSIBLE_VERSION=$(ansible --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p' | tr -d '\n')
         ANSIBLE_LINT_VERSION=$(ansible-lint --version --nocolor | sed -n '1s/^ansible-lint \([0-9.]*\).*/\1/p')
         ANSIBLE_GALAXY_VERSION=$(ansible-galaxy --version | sed -n '1s/.*core \([0-9.]*\).*/\1/p')
+
+        echo "ansible-version=$ANSIBLE_VERSION" >> $GITHUB_OUTPUT
+        echo "ansible-lint-version=$ANSIBLE_LINT_VERSION" >> $GITHUB_OUTPUT
+        echo "ansible-galaxy-version=$ANSIBLE_GALAXY_VERSION" >> $GITHUB_OUTPUT
 
         echo "🅰️ Ansible version: $ANSIBLE_VERSION"
         echo "🅰️ Ansible Lint version: $ANSIBLE_LINT_VERSION"
