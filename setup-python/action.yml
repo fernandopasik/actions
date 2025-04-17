@@ -190,3 +190,11 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       env:
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
+
+    - name: Calculate dependencies size
+      run: |
+        echo
+        echo "⚖️ Calculating dependencies size"
+        du -sh ${{ inputs.venv-dir }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
