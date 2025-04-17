@@ -72,3 +72,11 @@ runs:
         echo "🅰️ Ansible Galaxy: $ANSIBLE_GALAXY_VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+
+    - name: Calculate dependencies size
+      run: |
+        echo
+        echo "⚖️ Calculating dependencies size"
+        du -sh ${{ inputs.cache-path }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
