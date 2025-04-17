@@ -185,6 +185,7 @@ runs:
             pip install poetry
             poetry config virtualenvs.in-project true --local
             poetry install
+          ;;
           *) pip install $( [ -f requirements.txt ] && echo -r requirements.txt ) \
             $( [ -f requirements-dev.txt ] && echo -r requirements-dev.txt )
           ;;
