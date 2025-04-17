@@ -144,7 +144,7 @@ runs:
         ARCH_LOWER="$(echo "$ARCH" | tr '[:upper:]' '[:lower:]')"
         PM_CACHE="${{ steps.detect-cache-type.outputs.cache-type }}"
         OS_TAG=""
-        if [ "$PM_CACHE" != "pipenv" ]; then
+        if [ "$PM_CACHE" == "pip" ]; then
           . /etc/os-release
           OS_TAG="-$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         fi
