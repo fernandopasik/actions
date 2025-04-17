@@ -13,14 +13,23 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Calculate cache hash
+      id: calculate-cache-hash
+      run: |
+        echo
+        echo "🔑 Calculating cache hash"
+        CACHE_HASH=${{ hashFiles(format('{0}/**/requirements.yml', inputs.working-directory)) }}
+        echo "🔑 Calculated cache hash: $CACHE_HASH"
+        echo "cache-hash=$CACHE_HASH" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
     - name: Load Cached Ansible Galaxy dependencies
       uses: actions/cache@v4
       id: ansible-galaxy-cache
       with:
         path: ${{ inputs.working-directory }}/${{ inputs.cache-path }}
-        key: ansible-galaxy-${{ hashFiles(env.HASHED) }}
-      env:
-        HASHED: ${{ inputs.working-directory }}/**/requirements.yml
+        key: ansible-galaxy-${{ steps.calculate-cache-hash.outputs.cache-hash }}
 
     - name: Install Ansible Galaxy dependencies
       if: steps.ansible-galaxy-cache.outputs.cache-hit != 'true'
