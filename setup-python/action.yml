@@ -100,7 +100,7 @@ runs:
         # Reference for setup-python action options
         # https://github.com/actions/setup-python/blob/main/action.yml
         # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md
-        cache: ${{ env.CACHE_HIT == 'true' && '' || env.CACHE_TYPE }}
+        cache: ${{ env.CACHE_HIT == 'true' && env.NON_EXISTENT || env.CACHE_TYPE }}
         check-latest: true
         python-version: ${{ env.VERSION }}
         cache-dependency-path: ${{ env.CACHE_PATH }}
