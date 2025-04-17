@@ -150,7 +150,7 @@ runs:
       shell: bash
 
     - name: Create Python Virtual Env
-      if: steps.detect-cache-type.outputs.cache-type != 'pipenv'
+      if: steps.detect-cache-type.outputs.cache-type == 'pip'
       run: |
         echo
         if [ ! -d "${{ inputs.venv-dir }}" ]; then
@@ -168,7 +168,7 @@ runs:
       if: steps.python-cache.outputs.cache-hit != 'true'
       run: |
         echo
-        if [ "$CACHE_TYPE" != "pipenv" ]; then
+        if [ "$CACHE_TYPE" == "pip" ]; then
           echo "🐍 Activating Python Virtual Env"
           . ${{ inputs.venv-dir }}/bin/activate
         fi
@@ -181,6 +181,10 @@ runs:
             pip install pipenv
             PIPENV_VENV_IN_PROJECT=1 pipenv install --dev
           ;;
+          poetry)
+            pip install poetry
+            poetry config virtualenvs.in-project true --local
+            poetry install
           *) pip install $( [ -f requirements.txt ] && echo -r requirements.txt ) \
             $( [ -f requirements-dev.txt ] && echo -r requirements-dev.txt )
           ;;

@@ -339,6 +339,61 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+  test-setup-python-poetry:
+    name: Test Setup Python with poetry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ./test/setup-python/poetry
+  test-cache-python-poetry:
+    name: Test Python cache with poetry
+    runs-on: ubuntu-latest
+    needs: test-setup-python-poetry
+    outputs:
+      global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: test-setup-python
+        with:
+          working-directory: ./test/setup-python/poetry
+      - name: Display Setup Python outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.test-setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.test-setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.test-setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
+        shell: bash
+  delete-cache-python-poetry:
+    name: Delete Python cache with poetry
+    runs-on: ubuntu-latest
+    needs: test-cache-python-poetry
+    permissions:
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache-python-poetry.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache-python-poetry.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
   test-setup-ansible:
     name: Test Setup Ansible
     runs-on: ubuntu-latest
