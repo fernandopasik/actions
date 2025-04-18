@@ -131,13 +131,19 @@ runs:
       run: |
         echo
         PYTHON_VERSION=$(python -V | sed 's/^Python //')
-        PM_VERSION=$(pip -V | sed -n 's/^pip \([0-9.]\+\) .*/\1/p')
+        case "$CACHE_TYPE" in
+          pipenv)PM_VERSION="$(pipenv --version | sed -n 's/^pipenv, version \([0-9.]\+\)$/\1/p')";;
+          poetry)PM_VERSION="$(poetry --version | sed -n 's/^Poetry (version \([0-9.]*\)).*/\1/p')";;
+          *)PM_VERSION="$(pip -V | sed -n 's/^pip \([0-9.]\+\) .*/\1/p')";;
+        esac
         echo "python-version=$PYTHON_VERSION" >> $GITHUB_OUTPUT
         echo "package-manager-version=$PM_VERSION" >> $GITHUB_OUTPUT
         echo "🐍 Python version: $PYTHON_VERSION"
         echo "🐍 Pip version: $PM_VERSION"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
+      env:
+        CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
 
     - name: Output cache files
       id: output-cache-files
