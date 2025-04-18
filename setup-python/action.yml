@@ -17,6 +17,9 @@ outputs:
   python-version:
     description: Installed Python version
     value: ${{ steps.display-installed-versions.outputs.python-version }}
+  package-manager:
+    description: Detected Python Package Manager
+    value: ${{ steps.detect-cache-type.outputs.cache-type }}
   package-manager-version:
     description: Installed Python Package Manager version
     value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
