@@ -131,7 +131,7 @@ runs:
       run: |
         echo
         PYTHON_VERSION=$(python -V | sed 's/^Python //')
-        PM_VERSION=$(pip -V)
+        PM_VERSION=$(pip -V | sed -n 's/^pip \([0-9.]\+\) .*/\1/p')
         echo "python-version=$PYTHON_VERSION" >> $GITHUB_OUTPUT
         echo "package-manager-version=$PM_VERSION" >> $GITHUB_OUTPUT
         echo "🐍 Python version: $PYTHON_VERSION"
