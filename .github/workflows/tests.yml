@@ -235,18 +235,24 @@ jobs:
     with:
       package-manager: pip
       working-directory: ./test/setup-python/pip
+    permissions:
+      actions: write
   test-setup-python-pipenv:
     name: Test Setup Python with pipenv
     uses: ./.github/workflows/test-setup-python.yml
     with:
       package-manager: pipenv
       working-directory: ./test/setup-python/pipenv
+    permissions:
+      actions: write
   test-setup-python-poetry:
     name: Test Setup Python with poetry
     uses: ./.github/workflows/test-setup-python.yml
     with:
       package-manager: poetry
       working-directory: ./test/setup-python/poetry
+    permissions:
+      actions: write
   test-setup-ansible:
     name: Test Setup Ansible
     runs-on: ubuntu-latest
