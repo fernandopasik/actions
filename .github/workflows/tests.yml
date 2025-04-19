@@ -10,49 +10,49 @@ permissions: read-all
 
 jobs:
   test-setup-node-npm:
-    name: Test Setup Node with npm
+    name: Node with npm
     uses: ./.github/workflows/test-setup-node.yml
     with:
       working-directory: ./test/setup-node/npm
     permissions:
       actions: write
   test-setup-node-pnpm:
-    name: Test Setup Node with pnpm
+    name: Node with pnpm
     uses: ./.github/workflows/test-setup-node.yml
     with:
       working-directory: ./test/setup-node/pnpm
     permissions:
       actions: write
   test-setup-node-yarn1:
-    name: Test Setup Node with yarn1
+    name: Node with yarn1
     uses: ./.github/workflows/test-setup-node.yml
     with:
       working-directory: ./test/setup-node/yarn1
     permissions:
       actions: write
   test-setup-node-yarn:
-    name: Test Setup Node with yarn
+    name: Node with yarn
     uses: ./.github/workflows/test-setup-node.yml
     with:
       working-directory: ./test/setup-node/yarn
     permissions:
       actions: write
   test-setup-python-pip:
-    name: Test Setup Python with pip
+    name: Python with pip
     uses: ./.github/workflows/test-setup-python.yml
     with:
       working-directory: ./test/setup-python/pip
     permissions:
       actions: write
   test-setup-python-pipenv:
-    name: Test Setup Python with pipenv
+    name: Python with pipenv
     uses: ./.github/workflows/test-setup-python.yml
     with:
       working-directory: ./test/setup-python/pipenv
     permissions:
       actions: write
   test-setup-python-poetry:
-    name: Test Setup Python with poetry
+    name: Python with poetry
     uses: ./.github/workflows/test-setup-python.yml
     with:
       working-directory: ./test/setup-python/poetry
