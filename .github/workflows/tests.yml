@@ -233,7 +233,6 @@ jobs:
     name: Test Setup Python with pip
     uses: ./.github/workflows/test-setup-python.yml
     with:
-      package-manager: pip
       working-directory: ./test/setup-python/pip
     permissions:
       actions: write
@@ -241,7 +240,6 @@ jobs:
     name: Test Setup Python with pipenv
     uses: ./.github/workflows/test-setup-python.yml
     with:
-      package-manager: pipenv
       working-directory: ./test/setup-python/pipenv
     permissions:
       actions: write
@@ -249,7 +247,6 @@ jobs:
     name: Test Setup Python with poetry
     uses: ./.github/workflows/test-setup-python.yml
     with:
-      package-manager: poetry
       working-directory: ./test/setup-python/poetry
     permissions:
       actions: write

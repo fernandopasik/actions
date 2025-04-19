@@ -4,10 +4,6 @@ name: Test Python
 on:
   workflow_call:
     inputs:
-      package-manager:
-        description: Python package manager
-        required: true
-        type: string
       working-directory:
         description: Action working directory
         required: true
