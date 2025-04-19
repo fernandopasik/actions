@@ -1,0 +1,70 @@
+---
+name: Test Node
+# yamllint disable-line rule:truthy
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Action working directory
+        required: true
+        type: string
+
+permissions:
+  actions: write
+
+jobs:
+  test-setup:
+    name: Test Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        with:
+          working-directory: ${{ inputs.working-directory }}
+
+  test-cache:
+    name: Test Cache
+    runs-on: ubuntu-latest
+    needs: test-setup
+    outputs:
+      global-cache-file: ${{ steps.setup.outputs.global-cache-file }}
+      jobs-cache-file: ${{ steps.setup.outputs.jobs-cache-file }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: ./setup-node
+        id: setup
+        with:
+          working-directory: ${{ inputs.working-directory }}
+      - name: Display Setup Node outputs
+        run: |
+          echo
+          echo "🔎 node-version: ${{ steps.setup.outputs.node-version }}"
+          echo "🔎 package-manager: ${{ steps.setup.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.setup.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.setup.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.setup.outputs.jobs-cache-file }}"
+        shell: bash
+
+  delete-cache:
+    name: Delete Cache
+    runs-on: ubuntu-latest
+    needs: test-cache
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          GLOBAL_CACHE=${{ needs.test-cache.outputs.global-cache-file }}
+          JOBS_CACHE=${{ needs.test-cache.outputs.jobs-cache-file }}
+          echo "❌ Deleting cache key: $JOBS_CACHE"
+          gh cache delete "$JOBS_CACHE"
+          echo "❌ Deleting cache key: $GLOBAL_CACHE"
+          gh cache delete "$GLOBAL_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
