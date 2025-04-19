@@ -39,7 +39,7 @@ jobs:
         id: setup
         with:
           working-directory: ${{ inputs.working-directory }}
-      - name: Display Setup Node outputs
+      - name: Display Outputs
         run: |
           echo
           echo "🔎 node-version: ${{ steps.setup.outputs.node-version }}"
