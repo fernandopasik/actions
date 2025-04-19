@@ -17,3 +17,10 @@ lint:
 
 hooks:
 	pre-commit run --all-files
+
+update:
+	ncu --deep -u
+	cd test/setup-node/npm && npm i && npm up
+	cd test/setup-node/pnpm && pnpm i && pnpm up
+	cd test/setup-node/yarn1 && yarn && yarn upgrade
+	cd test/setup-node/yarn && yarn && yarn up
