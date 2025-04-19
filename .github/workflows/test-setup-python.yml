@@ -27,6 +27,7 @@ jobs:
         uses: ./setup-python
         with:
           working-directory: ${{ inputs.working-directory }}
+
   test-cache-python:
     name: Test Python cache with ${{ inputs.package-manager }}
     runs-on: ubuntu-latest
@@ -51,6 +52,7 @@ jobs:
           echo "🔎 global-cache-file: ${{ steps.test-setup-python.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.test-setup-python.outputs.jobs-cache-file }}"
         shell: bash
+
   delete-cache-python:
     name: Delete Python cache with ${{ inputs.package-manager }}
     runs-on: ubuntu-latest
