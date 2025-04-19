@@ -1,0 +1,88 @@
+---
+name: Test Ansible
+# yamllint disable-line rule:truthy
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Action working directory
+        required: true
+        type: string
+
+permissions:
+  actions: write
+
+jobs:
+  test-setup:
+    name: Test Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        with:
+          working-directory: ${{ inputs.working-directory }}
+      - name: Setup Ansible
+        uses: ./setup-ansible
+        with:
+          working-directory: ${{ inputs.working-directory }}
+
+  test-cache:
+    name: Test Cache
+    runs-on: ubuntu-latest
+    needs: test-setup
+    outputs:
+      python-global-cache-file: ${{ steps.setup-python.outputs.global-cache-file }}
+      python-jobs-cache-file: ${{ steps.setup-python.outputs.jobs-cache-file }}
+      ansible-jobs-cache-key: ${{ steps.setup-ansible.outputs.jobs-cache-key }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: ./setup-python
+        id: setup-python
+        with:
+          working-directory: ${{ inputs.working-directory }}
+      - name: Setup Ansible
+        uses: ./setup-ansible
+        id: setup-ansible
+        with:
+          working-directory: ${{ inputs.working-directory }}
+      - name: Display Outputs
+        run: |
+          echo
+          echo "🔎 python-version: ${{ steps.setup-python.outputs.python-version }}"
+          echo "🔎 package-manager: ${{ steps.setup-python.outputs.package-manager }}"
+          echo "🔎 package-manager-version: ${{ steps.setup-python.outputs.package-manager-version }}"
+          echo "🔎 global-cache-file: ${{ steps.setup-python.outputs.global-cache-file }}"
+          echo "🔎 jobs-cache-file: ${{ steps.setup-python.outputs.jobs-cache-file }}"
+
+          echo "🔎 ansible-version: ${{ steps.setup-ansible.outputs.ansible-version }}"
+          echo "🔎 ansible-lint-version: ${{ steps.setup-ansible.outputs.ansible-lint-version }}"
+          echo "🔎 ansible-galaxy-version: ${{ steps.setup-ansible.outputs.ansible-galaxy-version }}"
+          echo "🔎 ansible-jobs-cache-key: ${{ steps.setup-ansible.outputs.jobs-cache-key }}"
+        shell: bash
+
+  delete-cache:
+    name: Delete Cache
+    runs-on: ubuntu-latest
+    needs: test-cache
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Delete github cache
+        run: |
+          echo
+          PYTHON_GLOBAL_CACHE=${{ needs.test-cache.outputs.python-global-cache-file }}
+          PYTHON_JOBS_CACHE=${{ needs.test-cache.outputs.python-jobs-cache-file }}
+          ANSIBLE_JOBS_CACHE=${{ needs.test-cache.outputs.ansible-jobs-cache-key }}
+          echo "❌ Deleting cache key: $PYTHON_JOBS_CACHE"
+          gh cache delete "$PYTHON_JOBS_CACHE"
+          echo "❌ Deleting cache key: $PYTHON_GLOBAL_CACHE"
+          gh cache delete "$PYTHON_GLOBAL_CACHE"
+          echo "❌ Deleting cache key: $ANSIBLE_JOBS_CACHE"
+          gh cache delete "$ANSIBLE_JOBS_CACHE"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
