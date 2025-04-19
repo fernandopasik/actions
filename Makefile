@@ -24,3 +24,6 @@ update:
 	cd test/setup-node/pnpm && pnpm i && pnpm up
 	cd test/setup-node/yarn1 && yarn && yarn upgrade
 	cd test/setup-node/yarn && yarn && yarn up
+	cd test/setup-python/pipenv && pipenv update
+	cd test/setup-python/poetry && poetry update
+	find . -path './.venv' -prune -o \( -name '*requirements.txt' -o -name 'requirements-dev.txt' \) -exec sh -c 'printf "all\n" | pip-upgrade "$$1"' _ {} \;
