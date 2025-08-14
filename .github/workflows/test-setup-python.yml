@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Python
         uses: ./setup-python
         with:
@@ -33,7 +33,7 @@ jobs:
       jobs-cache-file: ${{ steps.setup.outputs.jobs-cache-file }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Python
         uses: ./setup-python
         id: setup
@@ -55,7 +55,7 @@ jobs:
     needs: test-cache
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Delete github cache
         run: |
           echo
