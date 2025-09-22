@@ -350,19 +350,19 @@
   resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-2.12.2.tgz#5913b6ec7efffebdfb37fae9a50122802ae08c64"
   integrity sha512-w2zfvhjNCkNMmMMOn5b0J8+OmUaBL1o40ipMvqcG6NRpdC+lKxmTi48DT8Xw0SzJ3AfmeFLB45zXZXtmbsjcgw==
 
-"@astrojs/db@^0.17.1":
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/@astrojs/db/-/db-0.17.1.tgz#23749fff988993255d2c3c3394d37a92cfd96411"
-  integrity sha512-QL09xZf5Om8AshIlt+YhLDYf6M1QSzv+kfuljsPrhEXJ8U/tuKnbWs2M3wimFaLG3/fU0prFix8lWt7zU8ytfA==
+"@astrojs/db@^0.17.2":
+  version "0.17.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/db/-/db-0.17.2.tgz#b4e2e466bffee7748910b1d7165f5e58bb786458"
+  integrity sha512-rFkw8Cj/kLwr63n1bS/sUw3hNywyvTkPZbKCdwAqd9FfbH3LdN+dH29XwmBC0NhXOxK3wA1jZBRsOOxpcVkV5w==
   dependencies:
-    "@libsql/client" "^0.15.2"
+    "@libsql/client" "^0.15.14"
     deep-diff "^1.0.2"
     drizzle-orm "^0.42.0"
     kleur "^4.1.5"
     nanoid "^5.1.5"
     prompts "^2.4.2"
     yargs-parser "^21.1.1"
-    zod "^3.24.4"
+    zod "^3.25.76"
 
 "@astrojs/internal-helpers@0.7.2":
   version "0.7.2"
@@ -2094,15 +2094,15 @@
   resolved "https://registry.yarnpkg.com/@keyv/serialize/-/serialize-1.1.0.tgz#08f5d89096110fdcf778e5337362e1cd5afad70a"
   integrity sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==
 
-"@libsql/client@^0.15.2":
-  version "0.15.14"
-  resolved "https://registry.yarnpkg.com/@libsql/client/-/client-0.15.14.tgz#bfd510bad9673cf03ad218621bf6757047825e5f"
-  integrity sha512-oXeFYcSyAsYWvpWVmynrwNwb+NHNHtMfSIVdfQTF1B9RsgDXQE5YCDP3SS0i1FA8nuLWy2trFDVwP1b2LNdNPQ==
+"@libsql/client@^0.15.14":
+  version "0.15.15"
+  resolved "https://registry.yarnpkg.com/@libsql/client/-/client-0.15.15.tgz#70196a0109f8cec41a32e42d9085386900e1943b"
+  integrity sha512-twC0hQxPNHPKfeOv3sNT6u2pturQjLcI+CnpTM0SjRpocEGgfiZ7DWKXLNnsothjyJmDqEsBQJ5ztq9Wlu470w==
   dependencies:
     "@libsql/core" "^0.15.14"
     "@libsql/hrana-client" "^0.7.0"
     js-base64 "^3.7.5"
-    libsql "^0.5.20"
+    libsql "^0.5.22"
     promise-limit "^2.7.0"
 
 "@libsql/core@^0.15.14":
@@ -8226,7 +8226,7 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libsql@^0.5.20:
+libsql@^0.5.22:
   version "0.5.22"
   resolved "https://registry.yarnpkg.com/libsql/-/libsql-0.5.22.tgz#7a44ad55246b6abade60725ec1d0acabd5634c19"
   integrity sha512-NscWthMQt7fpU8lqd7LXMvT9pi+KhhmTHAJWUB/Lj6MWa0MKFv0F2V4C6WKKpjCVZl0VwcDz4nOI3CyaT1DDiA==
@@ -13344,7 +13344,7 @@ zod@3.22.3:
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.3.tgz#2fbc96118b174290d94e8896371c95629e87a060"
   integrity sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==
 
-zod@^3.24.1, zod@^3.24.4:
+zod@^3.24.1, zod@^3.24.4, zod@^3.25.76:
   version "3.25.76"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.25.76.tgz#26841c3f6fd22a6a2760e7ccb719179768471e34"
   integrity sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==
