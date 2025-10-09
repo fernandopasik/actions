@@ -13,7 +13,7 @@ pydantic = "==2.11.7"
 
 [dev-packages]
 black = "==25.1.0"
-django-stubs = "==5.2.2"
+django-stubs = "==5.2.7"
 djangorestframework-stubs = "==3.16.2"
 mdformat = "==0.7.22"
 mdformat-frontmatter = "==2.0.8"
