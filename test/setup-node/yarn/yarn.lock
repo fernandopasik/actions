@@ -488,19 +488,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/db@npm:^0.17.1":
-  version: 0.17.1
-  resolution: "@astrojs/db@npm:0.17.1"
+"@astrojs/db@npm:^0.18.2":
+  version: 0.18.2
+  resolution: "@astrojs/db@npm:0.18.2"
   dependencies:
-    "@libsql/client": "npm:^0.15.2"
+    "@libsql/client": "npm:^0.15.15"
     deep-diff: "npm:^1.0.2"
     drizzle-orm: "npm:^0.42.0"
-    kleur: "npm:^4.1.5"
-    nanoid: "npm:^5.1.5"
+    nanoid: "npm:^5.1.6"
+    picocolors: "npm:^1.1.1"
     prompts: "npm:^2.4.2"
     yargs-parser: "npm:^21.1.1"
-    zod: "npm:^3.24.4"
-  checksum: 10c0/f54d44af28141cfa79f0b47789359a1ed775f2cde96a17392c0678fee34945aec1f5a316e62001bd6a10dd5984361ada5be5738a60530f21cfca227aef74578b
+    zod: "npm:^3.25.76"
+  checksum: 10c0/5fe5982b9bb6078089ec7553ea80f908207e0bbbc1c9dd91ffe76e2fd3f961f46239c8177660f242815e9de3084675bd1554332141307954f2c447abaf85b340
   languageName: node
   linkType: hard
 
@@ -2712,16 +2712,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@libsql/client@npm:^0.15.2":
-  version: 0.15.14
-  resolution: "@libsql/client@npm:0.15.14"
+"@libsql/client@npm:^0.15.15":
+  version: 0.15.15
+  resolution: "@libsql/client@npm:0.15.15"
   dependencies:
     "@libsql/core": "npm:^0.15.14"
     "@libsql/hrana-client": "npm:^0.7.0"
     js-base64: "npm:^3.7.5"
-    libsql: "npm:^0.5.20"
+    libsql: "npm:^0.5.22"
     promise-limit: "npm:^2.7.0"
-  checksum: 10c0/7050e626ca43851471f7c0b553a5f6d3ec260dfa22bfbeb255a13e1c2d398831780a55cec9b9cf200ecad6b5d848fb917da9b24731fd9961ebe5a83ef9e28f08
+  checksum: 10c0/1ae67280ebe27903ff142b07e2a256c22ef5ada65185286a72823e8eae8d9d2602e0d72e423d3bd64ae57494791bfffff946aa0fc7c2378b55a227ff63f8df69
   languageName: node
   linkType: hard
 
@@ -5106,7 +5106,7 @@ __metadata:
     "@apollo/subgraph": "npm:^2.11.2"
     "@astrojs/cloudflare": "npm:^12.6.8"
     "@astrojs/compiler": "npm:^2.12.2"
-    "@astrojs/db": "npm:^0.17.1"
+    "@astrojs/db": "npm:^0.18.2"
     "@astrojs/lit": "npm:^4.3.0"
     "@astrojs/mdx": "npm:^4.3.4"
     "@astrojs/node": "npm:^9.4.3"
@@ -11145,7 +11145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libsql@npm:^0.5.20":
+"libsql@npm:^0.5.22":
   version: 0.5.22
   resolution: "libsql@npm:0.5.22"
   dependencies:
@@ -12830,12 +12830,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^5.1.5":
-  version: 5.1.5
-  resolution: "nanoid@npm:5.1.5"
+"nanoid@npm:^5.1.6":
+  version: 5.1.6
+  resolution: "nanoid@npm:5.1.6"
   bin:
     nanoid: bin/nanoid.js
-  checksum: 10c0/e6004f1ad6c7123eeb037062c4441d44982037dc043aabb162457ef6986e99964ba98c63c975f96c547403beb0bf95bc537bd7bf9a09baf381656acdc2975c3c
+  checksum: 10c0/27b5b055ad8332cf4f0f9f6e2a494aa7e5ded89df4cab8c8490d4eabefe72c4423971d2745d22002868b1d50576a5e42b7b05214733b19f576382323282dd26e
   languageName: node
   linkType: hard
 
@@ -18350,7 +18350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.24.1, zod@npm:^3.24.4":
+"zod@npm:^3.24.1, zod@npm:^3.24.4, zod@npm:^3.25.76":
   version: 3.25.76
   resolution: "zod@npm:3.25.76"
   checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
