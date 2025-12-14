@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Python
         uses: ./setup-python
 
@@ -24,7 +24,7 @@ jobs:
     needs: install-python
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Python
         uses: ./setup-python
       - name: Check Format
@@ -36,7 +36,7 @@ jobs:
     needs: install-python
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Python
         uses: ./setup-python
       - name: Lint

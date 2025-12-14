@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     name: An example job
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: fernandopasik/actions/setup-node@main
 ```
 

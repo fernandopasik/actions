@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Python
         uses: ./setup-python
         with:
@@ -38,7 +38,7 @@ jobs:
       ansible-jobs-cache-key: ${{ steps.setup-ansible.outputs.jobs-cache-key }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Python
         uses: ./setup-python
         id: setup-python
@@ -70,7 +70,7 @@ jobs:
     needs: test-cache
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Delete github cache
         run: |
           echo
