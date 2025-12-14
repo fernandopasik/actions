@@ -18,6 +18,10 @@ lint:
 hooks:
 	pre-commit run --all-files
 
+test-clean:
+	rm -rf test/**/.venv
+	rm -rf test/**/node_modules
+
 update:
 	ncu --deep -u
 	cd test/setup-node/npm && npm i && npm up
