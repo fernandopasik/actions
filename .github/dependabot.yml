@@ -8,22 +8,5 @@ updates:
   - package-ecosystem: pip
     directories:
       - /
-      - /test/setup-ansible
-      - /test/setup-python/pip
-      - /test/setup-python/pipenv
-      - /test/setup-python/poetry
     schedule:
       interval: daily
-  - package-ecosystem: npm
-    directories:
-      - /
-      - /test/setup-node/npm
-      - /test/setup-node/pnpm
-      - /test/setup-node/yarn
-      - /test/setup-node/yarn1
-    schedule:
-      interval: daily
-    groups:
-      commitlint:
-        patterns:
-          - '@commitlint*'
