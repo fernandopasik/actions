@@ -20,6 +20,9 @@ outputs:
   package-manager-version:
     description: Installed Node.js Package Manager version
     value: ${{ steps.display-installed-versions.outputs.package-manager-version }}
+  cache-hit:
+    description: A boolean value to indicate an exact match was found for the primary key
+    value: ${{ steps.node-modules-cache.outputs.cache-hit }}
   global-cache-file:
     description: Node.js Package Manager global cache
     value: ${{ steps.output-cache-files.outputs.global-cache }}

@@ -45,8 +45,14 @@ jobs:
           echo "🔎 node-version: ${{ steps.setup.outputs.node-version }}"
           echo "🔎 package-manager: ${{ steps.setup.outputs.package-manager }}"
           echo "🔎 package-manager-version: ${{ steps.setup.outputs.package-manager-version }}"
+          echo "🔎 cache-hit: ${{ steps.setup.outputs.cache-hit }}"
           echo "🔎 global-cache-file: ${{ steps.setup.outputs.global-cache-file }}"
           echo "🔎 jobs-cache-file: ${{ steps.setup.outputs.jobs-cache-file }}"
+
+          if [ "${{ steps.setup.outputs.cache-hit }}" != true ]; then
+            echo "❌ Cache was not hit"
+            exit 1
+          fi
         shell: bash
 
   delete-cache:
