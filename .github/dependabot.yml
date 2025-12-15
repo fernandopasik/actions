@@ -6,7 +6,10 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: pip
-    directories:
-      - /
+    directory: /
     schedule:
       interval: daily
+  - package-ecosystem: pip
+    directory: /test
+    schedule:
+      interval: yearly
