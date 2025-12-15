@@ -19,8 +19,7 @@ hooks:
 	pre-commit run --all-files
 
 test-clean:
-	rm -rf test/**/.venv
-	rm -rf test/**/node_modules
+	find test -type d \( -name '.venv' -o -name 'node_modules' \) -prune -exec rm -rf {} +
 
 update:
 	ncu --deep -u
