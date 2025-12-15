@@ -40,9 +40,14 @@ it can be installed by the **Setup Python** action.
 
 ### Setup Node
 
-Setup Node.js and dependencies. A custom version can be provided, otherwise will use LTS. Can be
-used with any of the package managers: npm, yarn or pnpm. Caches and loads local node_modules
-folder.
+Setup Node.js, cache and install dependencies. Works best for the majority of use cases, were you
+need to save time between jobs by caching and not running full installs.
+
+- Logs node version and package manager version
+- Auto detects cache and package manager
+- Auto installs dependencies
+- Cache node_modules directories between jobs
+- Calculates and logs node_modules size
 
 ### Setup Python
 
