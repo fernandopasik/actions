@@ -14,14 +14,14 @@ runs:
   using: composite
   steps:
     - name: Auto approve
-      if: github.actor == ${{ inputs.author }}
+      if: ${{ github.actor == inputs.author }}
       run: gh pr review ${{ github.event.number }} --repo ${{ github.repository }} --approve
       env:
         GH_TOKEN: ${{ inputs.token }}
       shell: bash
 
     - name: Auto merge
-      if: github.actor == ${{ inputs.author }}
+      if: ${{ github.actor == inputs.author }}
       run: gh pr merge ${{ github.event.number }} --repo ${{ github.repository }} --auto --squash
       env:
         GH_TOKEN: ${{ inputs.token }}
