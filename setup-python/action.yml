@@ -88,7 +88,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Load Cached Python dependencies
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       id: python-cache
       with:
         path: ${{ inputs.working-directory }}/${{ inputs.venv-dir }}
@@ -111,7 +111,7 @@ runs:
         CACHE_TYPE: ${{ steps.detect-cache-type.outputs.cache-type }}
 
     - name: Install Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         # Reference for setup-python action options
         # https://github.com/actions/setup-python/blob/main/action.yml

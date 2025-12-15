@@ -91,7 +91,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Cache dependencies between jobs
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       id: node-modules-cache
       with:
         path: ${{ env.CACHE-PATH }}
@@ -105,7 +105,7 @@ runs:
 
     - name: Prepare Node.js
       if: ${{ env.PM != 'npm' && env.PM != 'yarn1' }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         check-latest: true
         node-version: ${{ steps.detect-version-to-install.outputs.version }}
@@ -128,7 +128,7 @@ runs:
         PM: ${{ steps.detect-node-pm.outputs.node-pm }}
 
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         # Reference for setup-node action options
         # https://github.com/actions/setup-node/blob/main/action.yml
