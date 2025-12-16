@@ -32,3 +32,9 @@ repos:
         entry: mdformat
         language: system
         types: [markdown]
+      - id: shellcheck
+        name: shellcheck
+        args: [-x]
+        entry: shellcheck
+        language: system
+        types: [shell]

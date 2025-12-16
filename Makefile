@@ -14,6 +14,7 @@ format:
 
 lint:
 	yamllint .
+	find . -type d \( -name '.venv' -o -name 'node_modules' \) -prune -o -name '*.sh' -exec shellcheck {} +
 
 hooks:
 	pre-commit run --all-files
