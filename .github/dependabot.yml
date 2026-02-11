@@ -5,11 +5,9 @@ updates:
     directory: /
     schedule:
       interval: weekly
+
   - package-ecosystem: pip
-    directory: /
+    directories:
+      - /*
     schedule:
       interval: weekly
-  - package-ecosystem: pip
-    directory: /test
-    schedule:
-      interval: yearly
