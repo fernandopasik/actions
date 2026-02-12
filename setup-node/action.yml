@@ -151,7 +151,7 @@ runs:
           case "$PM" in
             yarn1|yarn) yarn -v ;;
             pnpm) pnpm -v ;;
-            *) npm -v ;;
+            npm) npm -v ;;
           esac
         )
         echo "node-version=$NODE_VERSION" >> $GITHUB_OUTPUT
@@ -195,7 +195,7 @@ runs:
           yarn1) yarn install --frozen-lockfile ;;
           yarn) yarn --immutable ;;
           pnpm) pnpm install --frozen-lockfile ;;
-          *) npm ci ;;
+          npm) npm ci ;;
         esac
         echo "::endgroup::"
       shell: bash
