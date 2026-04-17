@@ -37,3 +37,4 @@ repos:
         entry: shellcheck
         language: system
         types: [shell]
+        files: (\.sh$)
