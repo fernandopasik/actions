@@ -25,9 +25,11 @@ test-clean:
 
 update:
 	cd test/setup-node/npm && rm -rf package-lock.json && npm i && npm up
-	cd test/setup-node/pnpm && rm -rf pnpm-lock.yaml && pnpm i && pnpm up
+	cd test/setup-node/pnpm && rm -rf pnpm-lock.yaml && pnpm approve-builds --all && pnpm i && pnpm up
 	cd test/setup-node/yarn1 && rm -rf yarn.lock && yarn && yarn upgrade
 	cd test/setup-node/yarn && rm -rf yarn.lock && yarn && yarn up -R
-# 	cd test/setup-python/pipenv && pipenv update
-# 	cd test/setup-python/poetry && poetry update
-# 	find . -path './.venv' -prune -o \( -name '*requirements.txt' -o -name 'requirements-dev.txt' \) -exec sh -c 'printf "all\n" | pip-upgrade "$$1"' _ {} \;
+	deactivate || true
+	cd test/setup-python/pip && pip-upgrade requirements.txt requirements-dev.txt --non-interactive -p all
+	cd test/setup-python/pipenv && pip-upgrade Pipfile --non-interactive -p all && pipenv update
+	cd test/setup-python/poetry && poetry up --latest
+	cd test/setup-ansible && pip-upgrade requirements-dev.txt --non-interactive -p all
