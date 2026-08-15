@@ -14,7 +14,7 @@ format:
 
 lint:
 	yamllint .
-	pymarkdownlnt scan .
+	pymarkdownlnt scan -r --respect-gitignore .
 	find . -type d \( -name '.venv' -o -name 'node_modules' \) -prune -o -name '*.sh' -exec shellcheck {} +
 
 hooks:
