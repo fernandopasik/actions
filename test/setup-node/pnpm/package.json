@@ -40,7 +40,7 @@
     "pino": "^10.4.0",
     "preact": "^11.2.0",
     "preact-iso": "^2.12.2",
-    "preact-render-to-string": "^6.8.2",
+    "preact-render-to-string": "^6.8.3",
     "preact-router": "^4.1.2",
     "progress": "^2.0.3",
     "redis": "^6.3.1",
@@ -129,5 +129,5 @@
     "glob": "^14.0.6",
     "minimatch": "^11.0.8"
   },
-  "packageManager": "pnpm@12.18.0"
+  "packageManager": "pnpm@12.20.0"
 }
