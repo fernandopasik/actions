@@ -158,10 +158,8 @@ runs:
           PM_VERSION="-v$(poetry --version | sed -n 's/.*version \([0-9]\+\)\..*/\1/p')"
         fi
         OS_TAG=""
-        if [ "$PM_CACHE" = "pip" ] || [ "$PM_CACHE" = "pipenv" ]; then
-          . /etc/os-release
-          OS_TAG="-$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
-        fi
+        . /etc/os-release
+        OS_TAG="-$VERSION_ID-$(echo "$NAME" | sed 's/ /-/g')"
         PYTHON_VERSION="${{ steps.display-installed-versions.outputs.python-version }}"
         CACHE_HASH="${{ steps.detect-cache-type.outputs.cache-hash }}"
 
