@@ -22,6 +22,7 @@ jobs:
       - name: Setup Python
         uses: ./setup-python
         with:
+          python-version: 3.14
           working-directory: ${{ inputs.working-directory }}
       - name: Setup Ansible
         uses: ./setup-ansible
@@ -43,6 +44,7 @@ jobs:
         uses: ./setup-python
         id: setup-python
         with:
+          python-version: 3.14
           working-directory: ${{ inputs.working-directory }}
       - name: Setup Ansible
         uses: ./setup-ansible
