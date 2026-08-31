@@ -29,7 +29,7 @@ update:
 	cd test/setup-node/yarn1 && rm -rf yarn.lock && yarn && yarn upgrade
 	cd test/setup-node/yarn && rm -rf yarn.lock && yarn && yarn up -R
 	deactivate || true
-	cd test/setup-python/pip && pip-upgrade requirements.txt requirements-dev.txt --non-interactive -p all
-	cd test/setup-python/pipenv && pip-upgrade Pipfile --non-interactive -p all && pipenv update
-	cd test/setup-python/poetry && poetry up --latest
-	cd test/setup-ansible && pip-upgrade requirements-dev.txt --non-interactive -p all
+	cd test/setup-python/pip && pip-upgrade requirements.txt requirements-dev.txt --non-interactive
+	cd test/setup-python/pipenv && pip-upgrade Pipfile --non-interactive && pipenv update
+	cd test/setup-python/poetry && pip-upgrade pyproject.toml --non-interactive && poetry update -n
+	cd test/setup-ansible && pip-upgrade requirements-dev.txt --non-interactive
